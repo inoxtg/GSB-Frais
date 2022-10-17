@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Comptable[]    findAll()
  * @method Comptable[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class Comptable extends ServiceEntityRepository
+class ComptableRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

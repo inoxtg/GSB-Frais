@@ -2,26 +2,26 @@
 
 namespace App\Repository;
 
-use App\Entity\Lignefraisforfait;
+use App\Entity\Lignefraishorsforfait;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
 
 /**
- * @extends ServiceEntityRepository<Lignefraisforfait>
+ * @extends ServiceEntityRepository<Lignefraishorsforfait>
  *
- * @method Lignefraisforfait|null find($id, $lockMode = null, $lockVersion = null)
- * @method Lignefraisforfait|null findOneBy(array $criteria, array $orderBy = null)
- * @method Lignefraisforfait[]    findAll()
- * @method Lignefraisforfait[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Lignefraishorsforfait|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Lignefraishorsforfait|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Lignefraishorsforfait[]    findAll()
+ * @method Lignefraishorsforfait[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class Lignefraisforfait extends ServiceEntityRepository
+class LignefraishorsforfaitRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Lignefraisforfait::class);
+        parent::__construct($registry, Lignefraishorsforfait::class);
     }
 
-    public function save(Lignefraisforfait $entity, bool $flush = false): void
+    public function save(Lignefraishorsforfait $entity, bool $flush = false): void
     {
         $this->getEntityManager()->persist($entity);
 
@@ -30,7 +30,7 @@ class Lignefraisforfait extends ServiceEntityRepository
         }
     }
 
-    public function remove(Lignefraisforfait $entity, bool $flush = false): void
+    public function remove(Lignefraishorsforfait $entity, bool $flush = false): void
     {
         $this->getEntityManager()->remove($entity);
 
@@ -40,7 +40,7 @@ class Lignefraisforfait extends ServiceEntityRepository
     }
 
 //    /**
-//     * @return Lignefraisforfait[] Returns an array of Lignefraisforfait objects
+//     * @return Lignefraishorsforfait[] Returns an array of Lignefraishorsforfait objects
 //     */
 //    public function findByExampleField($value): array
 //    {
@@ -54,7 +54,7 @@ class Lignefraisforfait extends ServiceEntityRepository
 //        ;
 //    }
 
-//    public function findOneBySomeField($value): ?Lignefraisforfait
+//    public function findOneBySomeField($value): ?Lignefraishorsforfait
 //    {
 //        return $this->createQueryBuilder('l')
 //            ->andWhere('l.exampleField = :val')

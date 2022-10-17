@@ -9,7 +9,7 @@ use Doctrine\ORM\Mapping as ORM;
  * Fichefrais
  *
  * @ORM\Table(name="FicheFrais", indexes={@ORM\Index(name="idEtat", columns={"idEtat"}), @ORM\Index(name="idVisiteur", columns={"idVisiteur"}), @ORM\Index(name="idComptable", columns={"idComptable"})})
- * @ORM\Entity(repositoryClass="App\Repository\Fichefrais")
+ * @ORM\Entity(repositoryClass="App\Repository\FichefraisRepository")
  */
 class Fichefrais
 {

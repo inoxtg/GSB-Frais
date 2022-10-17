@@ -6,6 +6,9 @@ use App\Modele\ConnexionBDD;
 
 require_once("ConnexionBDD.php");
 
+
+/*------------------------------VISITEUR------------------------------*/
+
 function getVisiteurAll() {
     try{
         $connexion = ConnexionBDD::getConnexion();
@@ -21,7 +24,7 @@ function getVisiteurAll() {
         return "BALISE ERREUR" . $e->getMessage();
     }
 }
-/*------------------------------VISITEUR------------------------------*/
+
 function loginVisiteur($login, $mdp){
     try{
         $connexion = ConnexionBDD::getConnexion();
@@ -42,16 +45,7 @@ function loginVisiteur($login, $mdp){
 
     }
 }
-/*
-function getFicheDeFraisForVisiteur($idVisiteur){
-    try{
-        $connexion = ConnexionBDD::getConnexion();
-        $query = " SELECT * FROM Visiteur WHERE login = :login and mdp = :mdp ";
-    }catch(PDOException $e){
-        die();
-        return "BALISE ERREUR CONNEXION" . $e->getMessage();
-}
-*/
+
 
 /*------------------------------COMPTABLE------------------------------*/
 function loginComptable($login, $mdp){

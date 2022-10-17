@@ -14,7 +14,7 @@ use Doctrine\Persistence\ManagerRegistry;
  * @method Etat[]    findAll()
  * @method Etat[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class Etat extends ServiceEntityRepository
+class EtatRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
