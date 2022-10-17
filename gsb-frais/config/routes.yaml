@@ -1,3 +1,12 @@
-#index:
-#    path: /
-#    controller: App\Controller\DefaultController::index
+index:
+    path: /
+    controller: App\Controller\AcceuilController::index
+
+
+visiteur_historique:
+    path: /visiteur/historique
+    controller: App\Controller\VisiteurController::historique
+
+visiteur_login:
+    path: /visiteur/login
+    controller: App\Controller\VisiteurController::login

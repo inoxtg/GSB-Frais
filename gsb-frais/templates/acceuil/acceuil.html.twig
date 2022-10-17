@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="fr">
+    <head>
+        <title>Acceuil</title>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <link href="{{ asset('styles/acceuil.css')}}" rel="stylesheet">
+        <link href="{{ asset('styles/annimation.css')}}" rel="stylesheet">
+    </head>
+    <body>
+
+        <script type="text/javascript" src="{{ asset('js/acceuil.js') }}"></script>
+    
+        <div class="page">
+
+            <div class="area">
+                <ul class="circles">
+                    {% for i in 0..18 %}
+                        <li></li>
+                    {% endfor %}
+                </ul>
+            </div>
+
+
+            <div class="card">
+
+            <div class="login_section">
+
+
+                <div class="login_card">
+
+                    <div class="form_visiteur" id="form_visiteur">
+                        
+                        <h1>Visiteur</h1>
+                        <div class="login_form">
+                            <form action="/visiteur/login" method="POST">
+    
+                                <input required="required" type="text" id="identifiant" name="identifiant" placeholder="identifiant">
+                                <br>
+                                <input required="required" type="password" id="password" name="password" placeholder="password">
+                                <br>
+                                <button type="submit">Se connecter</button>
+        
+                            </form>    
+                        </div>
+
+                        <p class="login_error_message">
+                            {% for message in app.flashes('fail_pssd_visiteur') %}
+                                {{message}}
+                            {% endfor %}
+                        </p>
+                        <div class="switch_login">
+                            <button onclick="comptable()">Comptable</button>
+                        </div>
+                    </div>
+        
+                    <div class="form_comptable" id="form_comptable">
+                        <h1>Comptable</h1>
+
+                        <div class="login_form">
+                            <form action="/comptable/login" method="POST">
+    
+                                <input required="required" type="text" id="identifiant" name="identifiant" placeholder="identifiant">
+                                <br>
+                                <input required="required" type="password" id="password" name="password" placeholder="password">
+                                <br>
+                                <button type="submit">Se connecter</button>
+        
+                            </form>    
+                        </div>
+
+                        <p class="login_error_message">
+                            {% for message in app.flashes('fail_pssd_comptable') %}
+                                {{message}}
+                            {% endfor %}
+                        </p>
+
+                        <div class="switch_login">
+                            <button onclick="visiteur()">Visiteur</button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <div class="information_section">
+                
+                <div class="information_card">
+                    <div id="slider" class="slider">
+                        
+                        <img src="{{ asset('img/canicule.jpg') }}" alt="La forêt de peupliers" id="slide" class="img_slide">
+                    </div>
+                </div>
+
+            </div>
+
+            </div>    
+        </div>
+
+    </body>
+</html>

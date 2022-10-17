@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ asset('styles/Vuevisiteur.css')}}" rel="stylesheet">
+    <title>Visiteur - Pannel</title>
+</head>
+<body>
+    <script type="text/javascript" src="{{ asset('js/fiches_frais.js')}}"></script>
+    
+    <div class="header">
+        <a class="header-title">GSB-Frais</a>
+
+        <a class="header-link" href="/">Deconnexion</a>
+        <a class="header-link" href="/visiteur/frais">Fiches</a>
+    </div>
+
+    <div class="page">
+
+        <div class="fiche_position">
+
+            <div class="fiche_frais">
+                <form method="POST" action="/visiteur/fiche/envoyer">
+
+                    <h1>Frais du mois d'Octobre 2022</h1>
+
+                    <table class="table_fiche">
+
+                        <tbody>
+
+                            <tr>
+                                <td class="td_libelle">Nuit d'hotel</td>
+                                <td class="td_input"><input name="frais_forfait_0" input class="input_prix" type="number" value="0" min="0"></td>
+                            </tr>
+                            <tr>
+                                <td class="td_libelle">Repas</td>
+                                <td class="td_input"><input name="frais_forfait_1" class="input_prix" type="number" value="0" min="0"></td>
+                            </tr>
+                            <tr>
+                                <td class="td_libelle">Trajet en avion</td>
+                                <td class="td_input"><input name="frais_forfait_2" class="input_prix" type="number" value="0" min="0"></td>
+                            </tr>
+
+                        </tbody>
+                    </table>
+
+                    <table class="table_fiche" id="table_hors_frais">
+                        <tbody>
+                            <tr>
+                                <td class="td_libelle"><input name="td_libelle_0" id="td_libelle_0" class="input_libelle" type="text" value=""></td>
+                                <td class="td_input"><input name="td_input_0" id="td_input_0" class="input_prix" type="number" value="0" min="0"></td>          
+                            </tr>
+                        </tbody>
+                    </table>
+
+                    <div>
+                        <button type="submit">Envoyer</button>
+                    </div>
+
+                </form>
+                <div class="add_frais_button_position">
+                    <button onclick="add_frais()" class="add_frais_button" role="button">Ajouter</button>
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</body>
+</html>
