@@ -1,0 +1,236 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+
+.header {
+    background-color: #5899c7;
+    height: 10vh;
+    width: 100%;
+}
+
+.header-title {
+    position: relative;
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 22px;
+    padding-top: 30px;
+    display: inline-block;
+    margin-left: 4%;
+    color: #23e9d9;
+}
+
+.header-link {
+    position: relative;
+    margin: 33px 20px 0px 20px;
+    padding-bottom: 5px;
+
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 20px;
+    float: right;
+    cursor: pointer;
+    color: #fffcf2;
+    background: rgba(235, 122, 52, 0);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.2s linear;
+}
+
+.header-link:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #fffcf2;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.header-link:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.page{
+    background-color: rgb(240, 240, 240);
+    height: 90vh;
+    display: flex;
+    width: 100%;
+    background-color: #4284b3;
+}
+
+.fiche_position
+{
+    position: relative;
+    padding: 50px 50px 0px 50px;
+    width: 650px;
+    display: flex;
+}
+
+.fiche_frais
+{
+    position: relative;
+    height: 80vh;
+    width: 100%;
+
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 10px 5px rgba(94,94,94,0.54); 
+    box-shadow: 0px 0px 10px 5px rgba(94,94,94,0.54);
+}
+
+.fiche_frais h1
+{
+    text-align: center;
+    margin: 20px;
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 25px;
+}
+
+.input_libelle{
+	font-family: "Roboto", sans-serif;
+	background-color: rgb(255, 255, 255);
+    width: 70%;
+    font-size: 15px;
+
+    border: 1px solid black;
+}
+
+.input_prix{
+    text-align: center;
+	font-family: "Roboto", sans-serif;
+	background-color: rgb(240, 240, 240);
+	border: 0px;
+	box-sizing: border-box;
+	font-size: 15px;
+    width: 100%;
+}
+
+.input_prix::-webkit-outer-spin-button,
+.input_prix::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  appearance: none;
+  margin: 0;
+}
+
+.table_fiche
+{
+    margin: 60px auto 10px auto;
+}
+
+.td_libelle
+{
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 17px;
+    line-height: 25px;
+    width: 90%;
+}
+
+.td_input
+{
+    font-size: 17px;
+    width: 50px;
+    display: inline-block;
+    white-space: nowrap;
+    text-align: center;
+    line-height: 25px;
+}
+
+
+
+.fiches_list_position
+{
+    position: relative;
+    padding: 50px 50px 0px 0px;
+    display: flex;
+}
+
+.fiches_list
+{
+    height: 80vh;
+    position: relative;
+    width: 400px;
+    overflow: scroll;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 10px 5px rgba(94,94,94,0.54); 
+    box-shadow: 0px 0px 10px 5px rgba(94,94,94,0.54);
+}
+
+.fiches_list::-webkit-scrollbar {
+    display: none;
+  }
+
+.fiches_list h1
+{
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 25px;
+    text-align: center;
+    margin: 20px;
+}
+
+.add_frais_button_position
+{
+    margin-left: 75px;
+}
+
+.add_frais_button {
+    background-color: #fff;
+    border-radius: 24px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+    cursor: pointer;
+    font-size: 14px;
+    height: 35px;
+    letter-spacing: .25px;
+    padding: 0 20px;
+    text-transform: none;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+}
+  
+.add_frais_button:hover {
+    background: #F6F9FE;
+    color: #174ea6;
+}
+  
+.add_frais_button:active {
+    box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+    outline: none;
+}
+
+.fiches_list button
+{
+    text-align: center;
+    width: 150px;
+    height: 40px;
+    display: block;
+    font-size: 18px;
+    border-radius: 5px;
+    outline: 0;
+    border: 0px;
+    margin: 0 auto 10px auto;
+    cursor: pointer;
+}
+
+.fini
+{
+    background-color: hsl(116, 75%, 53%);
+}
+
+.attente
+{
+    background-color: hsl(39, 90%, 60%);
+}
+
+.fini:hover
+{
+    background-color: hsl(116, 75%, 46%);
+}
+
+.attente:hover
+{
+    background-color: hsl(39, 87%, 53%);
+}
