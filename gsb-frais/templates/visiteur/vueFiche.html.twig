@@ -31,19 +31,12 @@
 
                         <tbody>
 
-                            <tr>
-                                <td class="td_libelle">Nuit d'hotel</td>
-                                <td class="td_input"><input name="frais_forfait_0" input class="input_prix" type="number" value="0" min="0"></td>
-                            </tr>
-                            <tr>
-                                <td class="td_libelle">Repas</td>
-                                <td class="td_input"><input name="frais_forfait_1" class="input_prix" type="number" value="0" min="0"></td>
-                            </tr>
-                            <tr>
-                                <td class="td_libelle">Trajet en avion</td>
-                                <td class="td_input"><input name="frais_forfait_2" class="input_prix" type="number" value="0" min="0"></td>
-                            </tr>
-
+                            {% for unFrais in fraisForfait %}
+                                <tr>
+                                    <td class="td_libelle">{{unFrais["libelle"]}}</td>
+                                    <td class="td_input"><input name="frais_forfait_{{loop.index}}" input class="input_prix" type="number" value="0" min="0"></td>
+                                </tr>        
+                            {% endfor %}
                         </tbody>
                     </table>
 

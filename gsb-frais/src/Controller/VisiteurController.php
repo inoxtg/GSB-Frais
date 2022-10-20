@@ -46,9 +46,13 @@ class VisiteurController extends AbstractController
 
     public function page_frais(): Response
     {
+
+        $fraisForfait = Modele\getFraisForfait();
+
         return $this->render('visiteur\vueFiche.html.twig',
         [
             'controller' => 'VisiteurController::page_frais',
+            'fraisForfait' => $fraisForfait,
         ]
         );
     }
