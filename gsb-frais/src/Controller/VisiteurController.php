@@ -9,14 +9,23 @@ use App\Modele;
 
 class VisiteurController extends AbstractController
 {
-    public function login()
-    {
+    public function login(Request $request){
 
         $identifiant = $_POST['identifiant'];
         $password = $_POST['password'];
+        $visiteur = Modele\loginVisiteur($identifiant, $password);
 
-        if(Modele\loginVisiteur($identifiant, $password))
+        if($visiteur != null)
         {
+            $session = $request->getSession();
+            $session->set("nom",$visiteur[0]['nom']);
+            $session->set("prenom",$visiteur[0]['prenom']);
+            $session->set("login",$visiteur[0]['login']);
+            $session->set("adresse",$visiteur[0]['adresse']);
+            $session->set("codePostal",$visiteur[0]['cp']);
+            $session->set("ville",$visiteur[0]['ville']);
+            $session->set("dateEmbauche",$visiteur[0]['dateEmbauche']);
+
             return $this->redirectToRoute('visiteur_frais');
         }
 
