@@ -1,0 +1,78 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+
+.page{
+    background-color: rgb(240, 240, 240);
+    height: 90vh;
+    display: flex;
+    width: 100%;
+    background-color: #4284b3;
+}
+
+
+.fiches_list_position
+{
+    position: relative;
+    padding: 50px 50px 0px 30px;
+    display: flex;
+}
+
+.fiches_list
+{
+    height: 80vh;
+    position: relative;
+    width: 400px;
+    overflow: scroll;
+    background-color: white;
+    -webkit-box-shadow: 0px 0px 10px 5px rgba(94,94,94,0.54); 
+    box-shadow: 0px 0px 10px 5px rgba(94,94,94,0.54);
+}
+
+.fiches_list::-webkit-scrollbar {
+    display: none;
+  }
+
+.fiches_list h1
+{
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 25px;
+    text-align: center;
+    margin: 20px;
+}
+
+.fiches_list button
+{
+    text-align: center;
+    width: 150px;
+    height: 40px;
+    display: block;
+    font-size: 18px;
+    border-radius: 5px;
+    outline: 0;
+    border: 0px;
+    margin: 0 auto 10px auto;
+    cursor: pointer;
+}
+
+
+.fini
+{
+    background-color: hsl(116, 75%, 53%);
+}
+
+.attente
+{
+    background-color: hsl(39, 90%, 60%);
+}
+
+.fini:hover
+{
+    background-color: hsl(116, 75%, 46%);
+}
+
+.attente:hover
+{
+    background-color: hsl(39, 87%, 53%);
+}

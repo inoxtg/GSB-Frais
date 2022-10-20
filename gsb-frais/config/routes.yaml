@@ -1,11 +1,15 @@
-index:
+accueil:
     path: /
-    controller: App\Controller\AcceuilController::index
+    controller: App\Controller\AcceuilController::accueil
 
 
 visiteur_historique:
     path: /visiteur/historique
     controller: App\Controller\VisiteurController::historique
+
+visiteur_frais:
+    path: /visiteur/frais
+    controller: App\Controller\VisiteurController::page_frais
 
 visiteur_login:
     path: /visiteur/login

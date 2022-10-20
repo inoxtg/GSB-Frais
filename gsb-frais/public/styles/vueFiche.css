@@ -169,37 +169,3 @@
     box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
     outline: none;
 }
-
-.fiches_list button
-{
-    text-align: center;
-    width: 150px;
-    height: 40px;
-    display: block;
-    font-size: 18px;
-    border-radius: 5px;
-    outline: 0;
-    border: 0px;
-    margin: 0 auto 10px auto;
-    cursor: pointer;
-}
-
-.fini
-{
-    background-color: hsl(116, 75%, 53%);
-}
-
-.attente
-{
-    background-color: hsl(39, 90%, 60%);
-}
-
-.fini:hover
-{
-    background-color: hsl(116, 75%, 46%);
-}
-
-.attente:hover
-{
-    background-color: hsl(39, 87%, 53%);
-}
