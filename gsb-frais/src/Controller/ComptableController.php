@@ -7,7 +7,7 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Modele;
 
-class VisiteurController extends AbstractController
+class ComptableController extends AbstractController
 {
     public function login()
     {
@@ -15,26 +15,26 @@ class VisiteurController extends AbstractController
         $identifiant = $_POST['identifiant'];
         $password = $_POST['password'];
 
-        if(Modele\loginVisiteur($identifiant, $password))
+        if(Modele\loginComptable($identifiant, $password))
         {
-            return $this->redirectToRoute('visiteur_frais');
+            return $this->redirectToRoute('comptable_frais');
         }
 
         $this->addFlash(
-            'fail_pssd_visiteur', 'Identifiant ou mot de passe invalide'
+            'fail_pssd_comptable', 'Identifiant ou mot de passe invalide'
         );
         return $this->redirectToRoute('accueil');
     }
-    
-    public function historique(): Response
+
+    public function fiche(): Response // change func name
     {
-        return $this->render('/visiteur/vueHistorique.html.twig',
+        return $this->render('/comptable/vueFiche.html.twig', // set vue
         [
-            'controller' => 'VisiteurController::historique',
+            'controller' => 'ComptableController::fiche', // change func name
         ]
         );
     }
-
+    
     public function page_frais(): Response
     {
         return $this->render('visiteur\vueFiche.html.twig',

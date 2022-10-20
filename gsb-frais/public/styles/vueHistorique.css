@@ -3,6 +3,58 @@
     padding: 0;
 }
 
+.header {
+    background-color: #5899c7;
+    height: 10vh;
+    width: 100%;
+}
+
+.header-title {
+    position: relative;
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 22px;
+    padding-top: 30px;
+    display: inline-block;
+    margin-left: 4%;
+    color: #23e9d9;
+}
+
+.header-link {
+    position: relative;
+    margin: 33px 20px 0px 20px;
+    padding-bottom: 5px;
+
+    font-family: 'Hind Siliguri', sans-serif;
+    font-size: 20px;
+    float: right;
+    cursor: pointer;
+    color: #fffcf2;
+    background: rgba(235, 122, 52, 0);
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    text-decoration: none;
+    text-align: center;
+    transition: 0.2s linear;
+}
+
+.header-link:after {
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: #fffcf2;
+    transform-origin: bottom right;
+    transition: transform 0.25s ease-out;
+}
+
+.header-link:hover:after {
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
 .page{
     background-color: rgb(240, 240, 240);
     height: 90vh;
