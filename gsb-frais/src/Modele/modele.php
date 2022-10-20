@@ -80,11 +80,6 @@ function getLigneFraisForfaitAndFicheFraisForVisiteurAndMois($idVisiteur, $mois)
             $ligneFraisForfaitFetch = $ligneFraisForfait->fetchAll();
             return $ligneFraisForfaitFetch;
         }else{
-
-            /*---------------MEMO-----------------
-            $query = "INSERT INTO FicheFrais"
-            return null;
-            */
             return null;
         }
 
@@ -92,7 +87,36 @@ function getLigneFraisForfaitAndFicheFraisForVisiteurAndMois($idVisiteur, $mois)
         echo $e->getMessage();
     }
 }
+function getLigneHorsForfaitAndFicheFraisForVisiteurAndMois($idVisiteur, $mois){
+    try{
+        $connexion = ConnexionBDD::getConnexion();
+        if(existsFicheFraisForVisiteurAndMois($idVisiteur, $mois)){
+            $query = "SELECT * FROM LigneFraisHorsForfait AS lfhf "
+                    ."JOIN FicheFrais AS ff "
+                    ."ON ff.idFicheFrais = lfhf.idFicheFrais "
+                    ."WHERE ff.mois = :mois AND ff.idVisiteur = :visiteur ";
+            $ligneFraisHorsForfait = $connexion->prepare($query);
+            $ligneFraisHorsForfait->execute(array(
+                ":visiteur" => $idVisiteur,
+                ":mois" => $mois
+            ));
+            $ligneFraisHorsForfaitFecth = $ligneFraisHorsForfait->fetchAll();
+            return $ligneFraisHorsForfaitFecth;
+        }else{
+            return null;
+        }
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+/*
+function insertOrUpdateLigneFraisForfait(
+    $idVisiteur,
+    $mois,
+    $){
 
+}
+*/
 /*------------------------------COMPTABLE------------------------------*/
 function loginComptable($login, $mdp){
     try{
@@ -106,9 +130,9 @@ function loginComptable($login, $mdp){
         ));
         $comptableFetch = $comptable->fetchAll();
         if(count($comptableFetch) == 1 ){
-            return true;
+            return $comptableFetch;
         }else{
-            return false;
+            return null;
         }
     }catch(PDOException $e){
         echo $e->getMessage();
