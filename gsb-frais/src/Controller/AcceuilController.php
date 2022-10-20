@@ -8,9 +8,9 @@ use Symfony\Component\HttpFoundation\Response;
 
 class AcceuilController extends AbstractController
 {
-    public function index(Request $request): Response
+    public function accueil(Request $request): Response
     {
-        return $this->render('acceuil\acceuil.html.twig',
+        return $this->render('acceuil\vueAccueil.html.twig',
         [
             'controller' => 'Acceuil\AcceuilController',
         ]

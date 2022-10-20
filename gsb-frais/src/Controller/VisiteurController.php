@@ -9,15 +9,6 @@ use Symfony\Component\HttpFoundation\Response;
 class VisiteurController extends AbstractController
 {
 
-    public function page_frais(): Response
-    {
-        return $this->render('visiteur\vueFiche.html.twig',
-        [
-            'controller' => 'VisiteurController',
-        ]
-        );
-    }
-
     public function login()
     {
 
@@ -26,7 +17,7 @@ class VisiteurController extends AbstractController
 
         if(true)
         {
-            return $this->redirectToRoute('visiteur_fiche');
+            return $this->redirectToRoute('visiteur_frais');
         }
 
         $this->addFlash(
@@ -49,6 +40,15 @@ class VisiteurController extends AbstractController
         return $this->render('/visiteur/vueHistorique.html.twig',
         [
             'controller' => 'VisiteurController::historique',
+        ]
+        );
+    }
+
+    public function page_frais(): Response
+    {
+        return $this->render('visiteur\vueFiche.html.twig',
+        [
+            'controller' => 'VisiteurController::page_frais',
         ]
         );
     }
