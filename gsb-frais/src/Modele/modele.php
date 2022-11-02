@@ -236,8 +236,33 @@ function createLigneHorsForfait($idVisiteur, $mois, $libelle, $montant, $date){
         $connexion = ConnexionBDD::getConnexion();
         $ficheFrais = getFicheFraisForVisiteurAndMois($idVisiteur, $mois);
         $idFicheFrais = $ficheFrais[0]['idFicheFrais'];
-
+        $query = "INSERT INTO `LigneFraisHorsForfait` "
+                ."(`idFicheFrais`,`libelle`,`date`,`montant`) "
+                ." VALUES (:idFicheFrais, :libelle, :date, :montant) ";
+        $creation = $connexion->prepare($query);
+        $creation->execute(array(
+           ":idFicheFrais" => $idFicheFrais,
+           ":libelle" => $libelle,
+           ":date" => $date,
+           ":montant" => $montant
+        ));
     }catch (PDOException $e){
+        echo $e->getMessage();
+    }
+}
+/*
+ SUPPRESSION LIGNE FRAIS HORS FORFAIT
+*/
+function removeLigneFraisHorsForfait($idLigneFraisHorsForfait){
+    try{
+        $connexion = ConnexionBDD::getConnexion();
+        $query = "DELETE FROM `LigneFraisHorsForfait` "
+                ."WHERE `idLigneFraisHorsForfait` = :idLigneFraisHorsForfait ";
+        $delete = $connexion->prepare($query);
+        $delete->execute(array(
+            ":idLigneFraisHorsForfait" => $idLigneFraisHorsForfait
+        ));
+    }catch(PDOException $e){
         echo $e->getMessage();
     }
 }
