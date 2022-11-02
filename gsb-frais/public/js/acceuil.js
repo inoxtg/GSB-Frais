@@ -26,6 +26,6 @@ function ChangeSlide() {
     if (numero < 0) numero = slide.length - 1;
     if (numero > slide.length - 1) numero = 0;
     document.getElementById("slide").src = slide[numero];
-    setTimeout("ChangeSlide()", 4500);
+    setTimeout("ChangeSlide()", 7500);
 }
-setTimeout("ChangeSlide()", 4500);
+setTimeout("ChangeSlide()", 7500);

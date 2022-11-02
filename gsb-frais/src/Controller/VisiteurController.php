@@ -58,6 +58,14 @@ class VisiteurController extends AbstractController
         );
     }
 
+    public function reception_fiche()
+    {
+        $data = $_POST;
+        
+        echo var_dump($data);
+
+        exit;
+    }
 }
 
 ?>

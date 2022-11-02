@@ -25,7 +25,7 @@
             <div class="fiche_frais">
                 <form method="POST" action="/visiteur/fiche/envoyer" id="fiche">
 
-                    <h1>Frais du mois d'Octobre 2022</h1>
+                    <h1>Frais du mois de Novembre 2022</h1>
 
                     <table class="table_fiche">
 
@@ -41,8 +41,8 @@
                             {% for unFrais in fraisForfait %}
                                 <tr>
                                     <td class="td_libelle">{{unFrais["libelle"]}}</td>
-                                    <td class="td_input"><input name="frais_forfait_{{loop.index}}" input class="input_prix" type="number" value="0" min="0"></td>
-                                </tr>        
+                                    <td class="td_input"><input name="frais_forfait[{{loop.index}}]" input class="input_prix" type="number" value="0" min="0"></td>
+                                </tr>
                             {% endfor %}
                         </tbody>
                     </table>
@@ -52,14 +52,16 @@
                         <thead>
                             <tr>
                                 <td>Frais</td>
+                                <td>Date</td>
                                 <td>Prix</td>
                             <tr>
                         </thead>
 
                         <tbody>
                             <tr>
-                                <td class="td_libelle"><input name="td_libelle_0" id="td_libelle_0" class="input_libelle" type="text" value=""></td>
-                                <td class="td_input"><input name="td_input_0" id="td_input_0" class="input_prix" type="number" value="0" min="0"></td>          
+                                <td class="td_libelle"><input name="frais_hors_forfait[0][libelle]" id="td_libelle_0" class="input_libelle" type="text" value=""></td>
+                                <td class="td_date"><input name="frais_hors_forfait[0][date]" id="td_date_0" class="input_date" type="date"></td>
+                                <td class="td_input"><input name="frais_hors_forfait[0][input]" id="td_input_0" class="input_prix" type="number" value="0" min="0"></td>
                             </tr>
                         </tbody>
                     </table>
@@ -70,7 +72,7 @@
                 </div>
 
                 <div>
-                    <button type="fiche" form="my-form">Envoyer</button>
+                    <button type="submit" form="fiche">Envoyer</button>
                 </div>
 
             </div>
