@@ -107,17 +107,22 @@ function createFicheFraisForVisiteurAndMois($idVisiteur, $mois){
  */
 function getFicheFraisForVisiteurAndMois($idvisiteur, $mois){
     try{
-        $connexion = ConnexionBDD::getConnexion();
-        $query = "SELECT * FROM FicheFrais "
-            ."WHERE `idVisiteur` = :idVisiteur "
-            ."AND `mois` = :mois ";
-        $ficheFrais = $connexion->prepare($query);
-        $ficheFrais->execute(array(
-           ":idVisiteur" => $idvisiteur,
-           ":mois" => $mois
-        ));
-        $ficheFraisFetch = $ficheFrais->fetchAll();
-        return $ficheFraisFetch;
+        if(existsFicheFraisForVisiteurAndMois($idvisiteur, $mois) == 1 ){
+            $connexion = ConnexionBDD::getConnexion();
+            $query = "SELECT * FROM FicheFrais "
+                ."WHERE `idVisiteur` = :idVisiteur "
+                ."AND `mois` = :mois ";
+            $ficheFrais = $connexion->prepare($query);
+            $ficheFrais->execute(array(
+                ":idVisiteur" => $idvisiteur,
+                ":mois" => $mois
+            ));
+            $ficheFraisFetch = $ficheFrais->fetchAll();
+            return $ficheFraisFetch;
+        }else{
+            createFicheFraisForVisiteurAndMois($idvisiteur, $mois);
+            return getFicheFraisForVisiteurAndMois($idvisiteur, $mois);
+        }
     }catch(PDOException $e){
         $e->getMessage();
     }
@@ -144,8 +149,8 @@ function createLigneFraisForfaitForFicheFrais($idFicheFrais){
     }
 }
 /*
- RECUPERATION LIGNEFRAISFORFAIT :
-        LIGNEFRAISFORFAIT EXISTE ???????????
+ <RECUPERATION LIGNEFRAISFORFAIT :
+        LIGNEFRAISFORFAIT EXISTE ???????????>
             SI NON CREATION
  */
 function getLigneFraisForfait($idVisiteur, $mois){
@@ -257,4 +262,5 @@ function loginComptable($login, $mdp){
         echo $e->getMessage();
     }
 }
+echo var_dump(getLigneFraisForfait(2,'2022-11'));
 ?>
