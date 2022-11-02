@@ -153,7 +153,7 @@ function getLigneFraisForfait($idVisiteur, $mois){
         $connexion = ConnexionBDD::getConnexion();
         if(existsFicheFraisForVisiteurAndMois($idVisiteur, $mois) == 1){
             $ficheFrais = getFicheFraisForVisiteurAndMois($idVisiteur, $mois);
-            $idFicheFrais = $ficheFrais['idFicheFrais'];
+            $idFicheFrais = $ficheFrais[0]['idFicheFrais'];
             $query = "SELECT * FROM LigneFraisForfait "
                 ."WHERE idFicheFrais = :idFicheFrais ";
             $ligneFraisForfait = $connexion->prepare($query);
@@ -182,7 +182,7 @@ function modifierLigneFraisForfait($idvisiteur, $mois, $idFraisForfait, $quantit
     try{
         $connexion = ConnexionBDD::getConnexion();
         $ficheFrais = getFicheFraisForVisiteurAndMois($idvisiteur, $mois);
-        $idFicheFrais = $ficheFrais['idFicheFrais'];
+        $idFicheFrais = $ficheFrais[0]['idFicheFrais'];
         $query = "UPDATE `LigneFraisForfait` "
                 ."SET `quantite` = :quantite "
                 ."WHERE `idFicheFrais` = :idFicheFrais "
@@ -226,9 +226,15 @@ function getLigneHorsForfaitAndFicheFraisForVisiteurAndMois($idVisiteur, $mois){
 /*
  CREATION LIGNE FRAIS HORS FORFAIT
  */
+function createLigneHorsForfait($idVisiteur, $mois, $libelle, $montant, $date){
+    try{
+        $connexion = ConnexionBDD::getConnexion();
+        $ficheFrais = getFicheFraisForVisiteurAndMois($idVisiteur, $mois);
+        $idFicheFrais = $ficheFrais[0]['idFicheFrais'];
 
-function createLigneHorsForfait(){
-
+    }catch (PDOException $e){
+        echo $e->getMessage();
+    }
 }
 /*------------------------------COMPTABLE------------------------------*/
 function loginComptable($login, $mdp){
