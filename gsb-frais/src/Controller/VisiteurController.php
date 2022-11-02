@@ -45,8 +45,12 @@ class VisiteurController extends AbstractController
         );
     }
 
-    public function page_frais(): Response
+    public function page_frais(Request $request): Response
     {
+
+        $session = $request->getSession();
+
+        Modele\getLigneFraisForfait($session->get("id"), date('Y-m'));
 
         $fraisForfait = Modele\getFraisForfait();
 
@@ -58,13 +62,16 @@ class VisiteurController extends AbstractController
         );
     }
 
-    public function reception_fiche()
+    public function reception_fiche(Request $request)
     {
-        $data = $_POST;
-        
-        echo var_dump($data);
+        $session = $request->getSession();
 
-        exit;
+        foreach($_POST["frais_forfait"] as $index=>$fraisForfait)
+        {
+            Modele\modifierLigneFraisForfait($session->get("id"), date('Y-m'), $index,$fraisForfait);
+        }
+        
+        return $this->redirectToRoute('visiteur_frais');
     }
 }
 
