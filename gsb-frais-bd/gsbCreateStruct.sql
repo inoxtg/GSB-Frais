@@ -91,11 +91,11 @@ CREATE TABLE IF NOT EXISTS `FicheFrais` (
   `nbJustificatifs` int(11) DEFAULT NULL,
   `montantValide` decimal(10,2) DEFAULT NULL,
   `dateModif` date DEFAULT NULL,
-  `idEtat` int not null default 0,
-  `idComptable` int not null default 0,
+  `idEtat` int not null default 1,
+  `idComptable` int not null default 1,
   PRIMARY KEY (`idFicheFrais`),
   FOREIGN KEY (`idEtat`) REFERENCES Etat(`idEtat`),
-  FOREIGN KEY (`idVisiteur`) REFERENCES Visiteur(`idVisiteur`),
+  FOREIGN KEY (`idVisiteur`) REFERENCES Visiteur(`idVisiteur`) ON DELETE CASCADE,
   FOREIGN KEY (`idComptable`) REFERENCES Comptable(`idComptable`)
 ) ENGINE=InnoDB;
 
