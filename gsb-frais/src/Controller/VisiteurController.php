@@ -18,6 +18,7 @@ class VisiteurController extends AbstractController
         if($visiteur != null)
         {
             $session = $request->getSession();
+            $session->set("id",$visiteur[0]['idVisiteur']);
             $session->set("nom",$visiteur[0]['nom']);
             $session->set("prenom",$visiteur[0]['prenom']);
             $session->set("login",$visiteur[0]['login']);

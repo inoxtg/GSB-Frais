@@ -20,7 +20,7 @@ use gsb;
 --
 
 CREATE TABLE IF NOT EXISTS `FraisForfait` (
-  `idFraisForfait` int NOT NULL,
+  `idFraisForfait` int NOT NULL auto_increment,
   `libelle` char(20) DEFAULT NULL,
   `montant` decimal(10,2) DEFAULT NULL,                                    
   PRIMARY KEY (`idFraisForfait`)
@@ -34,7 +34,7 @@ CREATE TABLE IF NOT EXISTS `FraisForfait` (
 --
 
 CREATE TABLE IF NOT EXISTS `Etat` (
-  `idEtat` int NOT NULL,
+  `idEtat` int NOT NULL auto_increment,
   `libelle` varchar(30) DEFAULT NULL,
   PRIMARY KEY (`idEtat`)
 ) ENGINE=InnoDB;
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS `Etat` (
 --
 
 CREATE TABLE IF NOT EXISTS `Visiteur` (
-  `idVisiteur` int NOT NULL,
+  `idVisiteur` int NOT NULL auto_increment,
   `nom` char(30) DEFAULT NULL,
   `prenom` char(30)  DEFAULT NULL, 
   `login` char(20) DEFAULT NULL,
@@ -66,7 +66,7 @@ CREATE TABLE IF NOT EXISTS `Visiteur` (
 --
 
 CREATE TABLE IF NOT EXISTS `Comptable` (
-  `idComptable` int NOT NULL,
+  `idComptable` int NOT NULL auto_increment,
   `nom` char(30) DEFAULT NULL,
   `prenom` char(30)  DEFAULT NULL,
   `login` char(20) DEFAULT NULL,
@@ -85,17 +85,17 @@ CREATE TABLE IF NOT EXISTS `Comptable` (
 --
 
 CREATE TABLE IF NOT EXISTS `FicheFrais` (
-  `idFicheFrais` int not null,
+  `idFicheFrais` int not null auto_increment,
   `idVisiteur` int NOT NULL,
   `mois` varchar(7) NOT NULL,
   `nbJustificatifs` int(11) DEFAULT NULL,
   `montantValide` decimal(10,2) DEFAULT NULL,
   `dateModif` date DEFAULT NULL,
-  `idEtat` int not null default 0,
-  `idComptable` int not null default 0,
+  `idEtat` int not null default 1,
+  `idComptable` int not null default 1,
   PRIMARY KEY (`idFicheFrais`),
   FOREIGN KEY (`idEtat`) REFERENCES Etat(`idEtat`),
-  FOREIGN KEY (`idVisiteur`) REFERENCES Visiteur(`idVisiteur`),
+  FOREIGN KEY (`idVisiteur`) REFERENCES Visiteur(`idVisiteur`) ON DELETE CASCADE,
   FOREIGN KEY (`idComptable`) REFERENCES Comptable(`idComptable`)
 ) ENGINE=InnoDB;
 
@@ -107,7 +107,7 @@ CREATE TABLE IF NOT EXISTS `FicheFrais` (
 --
 
 CREATE TABLE IF NOT EXISTS `LigneFraisForfait` (
-  `idLigneFraisForfait` int not null,
+  `idLigneFraisForfait` int not null auto_increment,
   `idFicheFrais` int not null,
   `idFraisForfait` int NOT NULL,
   `quantite` int(11) DEFAULT NULL,
@@ -123,7 +123,7 @@ CREATE TABLE IF NOT EXISTS `LigneFraisForfait` (
 --
 
 CREATE TABLE IF NOT EXISTS `LigneFraisHorsForfait` (
-  `idLigneFraisHorsForfait` int NOT NULL,
+  `idLigneFraisHorsForfait` int NOT NULL auto_increment,
   `idFicheFrais` int not null,
   `libelle` varchar(100) DEFAULT NULL,
   `date` date DEFAULT NULL,
