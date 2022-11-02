@@ -23,11 +23,18 @@
         <div class="fiche_position">
 
             <div class="fiche_frais">
-                <form method="POST" action="/visiteur/fiche/envoyer">
+                <form method="POST" action="/visiteur/fiche/envoyer" id="fiche">
 
                     <h1>Frais du mois d'Octobre 2022</h1>
 
                     <table class="table_fiche">
+
+                        <thead>
+                            <tr>
+                                <td>Frais</td>
+                                <td>Qnt</td>
+                            <tr>
+                        </thead>
 
                         <tbody>
 
@@ -41,6 +48,14 @@
                     </table>
 
                     <table class="table_fiche" id="table_hors_frais">
+                        
+                        <thead>
+                            <tr>
+                                <td>Frais</td>
+                                <td>Prix</td>
+                            <tr>
+                        </thead>
+
                         <tbody>
                             <tr>
                                 <td class="td_libelle"><input name="td_libelle_0" id="td_libelle_0" class="input_libelle" type="text" value=""></td>
@@ -49,13 +64,13 @@
                         </tbody>
                     </table>
 
-                    <div>
-                        <button type="submit">Envoyer</button>
-                    </div>
-
                 </form>
                 <div class="add_frais_button_position">
                     <button onclick="add_frais()" class="add_frais_button" role="button">Ajouter</button>
+                </div>
+
+                <div>
+                    <button type="fiche" form="my-form">Envoyer</button>
                 </div>
 
             </div>

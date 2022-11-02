@@ -1,4 +1,3 @@
-
 nb_input = 0
 
 function add_frais()
@@ -21,7 +20,6 @@ function add_frais()
 
         textboxCell.innerHTML = '<input id="td_libelle_' + nb_input + '" class="input_libelle" type="text" value="">';
         inputCell.innerHTML = '<input id="td_input_' + nb_input + '" class="input_prix" type="number" value="0" min="0">';
-
 
     }
 }
