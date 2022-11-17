@@ -143,6 +143,7 @@ CREATE TABLE IF NOT EXISTS `LigneFraisHorsForfait` (
   `libelle` varchar(100) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `montant` decimal(10,2) DEFAULT NULL,
+  `etatLigneFraisHorsForfait` boolean default TRUE,
   PRIMARY KEY (`idLigneFraisHorsForfait`),
   FOREIGN KEY (`idFicheFrais`) REFERENCES FicheFrais(`idFicheFrais`)
 ) ENGINE=InnoDB;
