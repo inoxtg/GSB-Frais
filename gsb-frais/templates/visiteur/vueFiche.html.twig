@@ -33,9 +33,9 @@
 
                             <thead>
                                 <tr>
-                                    <th>Frais</th>
-                                    <th>Qnt</th>
-                                <tr>
+                                    <th class="th_libelle">Frais Forfaitaire</th>
+                                    <th class="th_quantite">Quantité</th>
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -60,10 +60,11 @@
                             
                             <thead>
                                 <tr>
-                                    <td>Frais</td>
-                                    <td>Date</td>
-                                    <td>Prix</td>
-                                <tr>
+                                    <th class="th_hf_libelle">Frais Hors Forfait</td>
+                                    <th class="th_hf_date">Date</th>
+                                    <th class="th_hf_prix">Prix</th>
+                                    <th></th>
+                                </tr>
                             </thead>
 
                             <tbody>
@@ -71,6 +72,7 @@
                                     <td class="td_libelle"><input name="frais_hors_forfait[0][libelle]" id="td_libelle_0" class="input_libelle" type="text" value=""></td>
                                     <td class="td_date"><input name="frais_hors_forfait[0][date]" id="td_date_0" class="input_date" type="date"></td>
                                     <td class="td_input"><input name="frais_hors_forfait[0][input]" id="td_input_0" class="input_prix" type="number" value="0" min="0"></td>
+                                    <td>&span<td>
                                 </tr>
                             </tbody>
                         </table>

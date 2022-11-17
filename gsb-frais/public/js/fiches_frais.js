@@ -1,3 +1,13 @@
+function setClass(el, className, fn){
+    if(el) {
+      for (var i of el) {
+        if(typeof className === "string")
+           i.setAttribute("class", className);
+        if(fn) fn(i);
+      }
+    }
+  }
+
 nb_input = 0
 
 function add_frais()
@@ -16,9 +26,13 @@ function add_frais()
         let dateCell = newRow.insertCell(1);
         let inputCell = newRow.insertCell(2);
 
+        dateCell.className = "td_date";
+
         textboxCell.innerHTML = '<input name="frais_hors_forfait[' + nb_input + '][libelle]" id="td_libelle_' + nb_input + '" class="input_libelle" type="text" value="">';
         dateCell.innerHTML = '<input name="frais_hors_forfait[' + nb_input +'][date]" id="td_date_' + nb_input + '" class="input_date" type="date">';
         inputCell.innerHTML = '<input name="frais_hors_forfait[' + nb_input +'][input]" id="td_input_' + nb_input + '" class="input_prix" type="number" value="0" min="0">';
+
+
 
     }
 }
