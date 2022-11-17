@@ -27,59 +27,65 @@
 
                     <h1>Frais du mois de Novembre 2022</h1>
 
-                    <table class="table_fiche">
+                    <div class="form_table">
 
-                        <thead>
-                            <tr>
-                                <td>Frais</td>
-                                <td>Qnt</td>
-                            <tr>
-                        </thead>
+                        <table class="table_fiche">
 
-                        <tbody>
-
-                            {% for unFrais in fraisForfait %}
+                            <thead>
                                 <tr>
-                                    <td class="td_libelle">{{unFrais["libelle"]}}</td>
-                                    <td class="td_input">
-                                        <input 
-                                            name="frais_forfait[{{loop.index}}]" 
-                                            input class="input_prix" type="number" 
-                                            value="{{ligneFraisForfait[loop.index0]['quantite']}}" 
-                                            min="0"
-                                        >
-                                    </td>
+                                    <th>Frais</th>
+                                    <th>Qnt</th>
+                                <tr>
+                            </thead>
+
+                            <tbody>
+
+                                {% for unFrais in fraisForfait %}
+                                    <tr>
+                                        <td class="td_libelle">{{unFrais["libelle"]}}</td>
+                                        <td class="td_input">
+                                            <input 
+                                                name="frais_forfait[{{loop.index}}]" 
+                                                input class="input_prix" type="number" 
+                                                value="{{ligneFraisForfait[loop.index0]['quantite']}}" 
+                                                min="0"
+                                            >
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                            </tbody>
+                        </table>
+
+                        <table class="table_fiche" id="table_hors_frais">
+                            
+                            <thead>
+                                <tr>
+                                    <td>Frais</td>
+                                    <td>Date</td>
+                                    <td>Prix</td>
+                                <tr>
+                            </thead>
+
+                            <tbody>
+                                <tr>
+                                    <td class="td_libelle"><input name="frais_hors_forfait[0][libelle]" id="td_libelle_0" class="input_libelle" type="text" value=""></td>
+                                    <td class="td_date"><input name="frais_hors_forfait[0][date]" id="td_date_0" class="input_date" type="date"></td>
+                                    <td class="td_input"><input name="frais_hors_forfait[0][input]" id="td_input_0" class="input_prix" type="number" value="0" min="0"></td>
                                 </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
+                            </tbody>
+                        </table>
 
-                    <table class="table_fiche" id="table_hors_frais">
-                        
-                        <thead>
-                            <tr>
-                                <td>Frais</td>
-                                <td>Date</td>
-                                <td>Prix</td>
-                            <tr>
-                        </thead>
+                    
+                    </div>
 
-                        <tbody>
-                            <tr>
-                                <td class="td_libelle"><input name="frais_hors_forfait[0][libelle]" id="td_libelle_0" class="input_libelle" type="text" value=""></td>
-                                <td class="td_date"><input name="frais_hors_forfait[0][date]" id="td_date_0" class="input_date" type="date"></td>
-                                <td class="td_input"><input name="frais_hors_forfait[0][input]" id="td_input_0" class="input_prix" type="number" value="0" min="0"></td>
-                            </tr>
-                        </tbody>
-                    </table>
 
                 </form>
                 <div class="add_frais_button_position">
                     <button onclick="add_frais()" class="add_frais_button" role="button">Ajouter</button>
                 </div>
 
-                <div>
-                    <button type="submit" form="fiche">Envoyer</button>
+                <div class="form_submit_position">
+                    <button class="form_submit" type="submit" form="fiche">Envoyer</button>
                 </div>
 
             </div>

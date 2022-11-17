@@ -97,7 +97,6 @@
 	background-color: rgb(255, 255, 255);
     width: 70%;
     font-size: 15px;
-
     border: 1px solid black;
 }
 
@@ -118,11 +117,22 @@
   margin: 0;
 }
 
-.table_fiche
+
+.table
 {
-    margin: 60px auto 10px auto;
+    border-collapse: collapse;
 }
 
+.table_fiche th
+{
+    font-size: 12px;
+    color: #fff;
+    line-height: 1.4;
+    text-transform: uppercase;
+    background-color: #36304a;
+}
+
+/*
 .td_libelle
 {
     font-family: 'Hind Siliguri', sans-serif;
@@ -140,7 +150,7 @@
     text-align: center;
     line-height: 25px;
 }
-
+*/
 
 .add_frais_button_position
 {
@@ -167,6 +177,39 @@
 }
   
 .add_frais_button:active {
+    box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
+    outline: none;
+}
+
+
+.form_submit_position
+{
+    position: absolute;
+    bottom: 40px;
+    right: 60px;
+}
+
+.form_submit
+{
+    background-color: #fff;
+    border-radius: 20px;
+    border-style: none;
+    box-shadow: rgba(0, 0, 0, .2) 0 3px 5px -1px,rgba(0, 0, 0, .14) 0 6px 10px 0,rgba(0, 0, 0, .12) 0 1px 18px 0;
+    cursor: pointer;
+    font-size: 14px;
+    height: 35px;
+    letter-spacing: .25px;
+    padding: 0 20px;
+    text-transform: none;
+    transition: box-shadow 280ms cubic-bezier(.4, 0, .2, 1),opacity 15ms linear 30ms,transform 270ms cubic-bezier(0, 0, .2, 1) 0ms;
+}
+
+.form_submit:hover {
+    background: #F6F9FE;
+    color: #174ea6;
+}
+  
+.form_submit:active {
     box-shadow: 0 4px 4px 0 rgb(60 64 67 / 30%), 0 8px 12px 6px rgb(60 64 67 / 15%);
     outline: none;
 }
