@@ -37,12 +37,17 @@ class VisiteurController extends AbstractController
         return $this->redirectToRoute('accueil');
     }
     
-    public function historique(): Response
+    public function historique(Request $request): Response
     {
         // get historique
+
+        $session = $request->getSession();
+        $fichesFrais = Modele\getAllFicheFraisForVisiteur($session->get("id"));
+
         return $this->render('/visiteur/vueHistorique.html.twig',
         [
             'controller' => 'VisiteurController::historique',
+            'fichesFrais' => $fichesFrais
         ]
         );
     }
