@@ -2,6 +2,9 @@ accueil:
     path: /
     controller: App\Controller\AcceuilController::accueil
 
+deconnexion:
+    path: /logout
+    controller: App\Controller\AcceuilController::deconnexion
 
 visiteur_historique:
     path: /visiteur/historique

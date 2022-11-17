@@ -16,6 +16,16 @@ class AcceuilController extends AbstractController
         ]
         );
     }
+
+
+    public function deconnexion(Request $request)
+    {
+        $session = $request->getSession();
+        $session->clear();
+        return $this->redirectToRoute('accueil');
+    }
+    
+
 }
 
 ?>

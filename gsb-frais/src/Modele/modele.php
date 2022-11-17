@@ -287,5 +287,5 @@ function loginComptable($login, $mdp){
         echo $e->getMessage();
     }
 }
-echo var_dump(getLigneFraisForfait(2,'2022-11'));
+
 ?>

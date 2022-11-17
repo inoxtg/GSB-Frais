@@ -38,6 +38,7 @@ class VisiteurController extends AbstractController
     
     public function historique(): Response
     {
+        // get historique
         return $this->render('/visiteur/vueHistorique.html.twig',
         [
             'controller' => 'VisiteurController::historique',
