@@ -52,6 +52,19 @@ CREATE TABLE IF NOT EXISTS `EtatComptable` (
   PRIMARY KEY (`idEtatComptable`)
 ) ENGINE=InnoDB;
 
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `EtatLigneFraisHorsForfait`
+--
+
+CREATE TABLE IF NOT EXISTS `EtatLigneFraisHorsForfait` (
+  `idEtatLigneFraisHorsForfait` int NOT NULL,
+  `libelle` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`idEtatLigneFraisHorsForfait`)
+) ENGINE=InnoDB;
+
 -- --------------------------------------------------------
 
 --
@@ -143,9 +156,10 @@ CREATE TABLE IF NOT EXISTS `LigneFraisHorsForfait` (
   `libelle` varchar(100) DEFAULT NULL,
   `date` date DEFAULT NULL,
   `montant` decimal(10,2) DEFAULT NULL,
-  `etatLigneFraisHorsForfait` boolean default TRUE,
+  `idEtatLigneFraisHorsForfait` INT NOT NULL default 0,
   PRIMARY KEY (`idLigneFraisHorsForfait`),
-  FOREIGN KEY (`idFicheFrais`) REFERENCES FicheFrais(`idFicheFrais`)
+  FOREIGN KEY (`idFicheFrais`) REFERENCES FicheFrais(`idFicheFrais`),
+  FOREIGN KEY (`idEtatLigneFraisHorsForfait`) REFERENCES EtatLigneFraisHorsForfait(`idEtatLigneFraisHorsForfait`)
 ) ENGINE=InnoDB;
 
 -- --------------------------------------------------------

@@ -5,6 +5,7 @@ DELETE FROM `FicheFrais`;
 DELETE FROM `FraisForfait`;
 DELETE FROM `EtatVisiteur`;
 DELETE FROM `EtatComptable`;
+DELETE FROM `EtatLigneFraisHorsForfait                                                      `;
 DELETE FROM `Visiteur`;
 DELETE FROM `Comptable`;
 
@@ -39,6 +40,16 @@ INSERT INTO `EtatComptable` (`libelle`) VALUES
 ('En attente de validation'),
 ('Remboursée'),
 ('Validée et mise en paiement');
+-- --------------------------------------------------------
+--
+-- Contenu de la table `EtatLigneFraisHorsForfait`
+--
+
+INSERT INTO `EtatLigneFraisHorsForfait` (`idEtatLigneFraisHorsForfait`,`libelle`) VALUES
+(-1,'REFUSEE'),
+(0,'EN ATTENTE'),
+(1,'ACCEPTEE');
+
 -- --------------------------------------------------------
 
 --
@@ -88,7 +99,7 @@ INSERT INTO `Comptable` (`nom`, `prenom`, `login`, `mdp`, `adresse`, `cp`, `vill
 --
 
 INSERT INTO `FicheFrais` (`idVisiteur`,`mois`,`nbJustificatifs`,`montantValide`,`idEtatComptable`,`idEtatVisiteur`,`idComptable`) VALUES
-(1,'2022-10',0,0,1,1,1),
+(1,'2022-11',0,0,1,1,1),
 (5,'2022-10',0,0,3,1,1),
 (3,'2022-10',0,0,3,2,1),
 (1,'2022-09',0,0,1,2,1);

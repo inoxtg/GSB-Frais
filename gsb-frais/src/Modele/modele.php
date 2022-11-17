@@ -160,10 +160,10 @@ function getLigneFraisForfait($idVisiteur, $mois){
             $ficheFrais = getFicheFraisForVisiteurAndMois($idVisiteur, $mois);
             $idFicheFrais = $ficheFrais[0]['idFicheFrais'];
             $query = "SELECT * FROM LigneFraisForfait "
-                ."WHERE idFicheFrais = :idFicheFrais ";
+                    ."WHERE idFicheFrais = :idFicheFrais ";
             $ligneFraisForfait = $connexion->prepare($query);
             $ligneFraisForfait->execute(array(
-            ":idFicheFrais" => $idFicheFrais
+                ":idFicheFrais" => $idFicheFrais
             ));
             $ligneFraisForfaitFecth = $ligneFraisForfait->fetchAll();
             if(count($ligneFraisForfaitFecth) >= 1){
@@ -253,25 +253,30 @@ function createLigneHorsForfait($idVisiteur, $mois, $libelle, $montant, $date){
 /*
  SUPPRESSION LIGNE FRAIS HORS FORFAIT
 */
-function removeLigneFraisHorsForfait($idLigneFraisHorsForfait){
+function removeLigneFraisHorsForfait($visiteur, $mois, $libelle){
     try{
         $connexion = ConnexionBDD::getConnexion();
+        $ficheFrais = getFicheFraisForVisiteurAndMois($visiteur, $mois);
+        $idFicheFrais = $ficheFrais[0]['idFicheFrais'];
         $query = "DELETE FROM `LigneFraisHorsForfait` "
-                ."WHERE `idLigneFraisHorsForfait` = :idLigneFraisHorsForfait ";
+                ."WHERE `idFicheFrais` = :idFicheFrais "
+                ."AND `libelle` = :libelle ";
         $delete = $connexion->prepare($query);
         $delete->execute(array(
-            ":idLigneFraisHorsForfait" => $idLigneFraisHorsForfait
+            ":idFicheFrais" => $idFicheFrais,
+            ":libelle" => $libelle
         ));
     }catch(PDOException $e){
         echo $e->getMessage();
     }
 }
 /*------------------------------COMPTABLE------------------------------*/
+
 function loginComptable($login, $mdp){
     try{
         $connexion = ConnexionBDD::getConnexion();
         $query = "SELECT * FROM Comptable "
-            ."WHERE login = :login AND mdp = :mdp ";
+                ."WHERE login = :login AND mdp = :mdp ";
         $comptable = $connexion->prepare($query);
         $comptable->execute(array(
             ":login" => $login,
@@ -288,4 +293,26 @@ function loginComptable($login, $mdp){
     }
 }
 
+function modifierEtatLigneFraisHorsForfait($visiteur, $mois, $libelle, $etat){
+    try{
+        $connexion = ConnexionBDD::getConnexion();
+        $ficheFrais = getFicheFraisForVisiteurAndMois($visiteur, $mois);
+        $idFicheFrais = $ficheFrais[0]['idFicheFrais'];
+
+        $query = "UPDATE `LigneFraisHorsForfait` "
+                ."SET `idEtatLigneFraisHorsForfait` = :etat "
+                ."WHERE `idFicheFrais` = :idFicheFrais "
+                ."AND `libelle` = :libelle ";
+        $modifier = $connexion->prepare($query);
+        $modifier->execute(array(
+            ":idFicheFrais" => $idFicheFrais,
+            ":libelle" => $libelle,
+            ":etat" => $etat
+        ));
+        return 1;
+
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
 ?>
