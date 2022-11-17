@@ -91,8 +91,8 @@ function existsFicheFraisForVisiteurAndMois($idVisiteur, $mois){
 function createFicheFraisForVisiteurAndMois($idVisiteur, $mois){
     try{
         $connexion = ConnexionBDD::getConnexion();
-        $query = "INSERT INTO `FicheFrais` (`idVisiteur`,`mois`,`nbJustificatifs`,`montantValide`,`idEtat`,`idComptable`) "
-            ."VALUES (:visiteur, :mois, 0, 0, 1, 1) ";
+        $query = "INSERT INTO `FicheFrais` (`idVisiteur`,`mois`,`nbJustificatifs`,`montantValide`,`idComptable`) "
+            ."VALUES (:visiteur, :mois, 0, 0, 1) ";
         $create = $connexion->prepare($query);
         $create->execute(array(
             ':visiteur' => $idVisiteur,
