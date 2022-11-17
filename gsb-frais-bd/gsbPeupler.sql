@@ -5,7 +5,7 @@ DELETE FROM `FicheFrais`;
 DELETE FROM `FraisForfait`;
 DELETE FROM `EtatVisiteur`;
 DELETE FROM `EtatComptable`;
-DELETE FROM `EtatLigneFraisHorsForfait                                                      `;
+DELETE FROM `EtatLigneFraisHorsForfait`;
 DELETE FROM `Visiteur`;
 DELETE FROM `Comptable`;
 
@@ -110,9 +110,6 @@ INSERT INTO `FicheFrais` (`idVisiteur`,`mois`,`nbJustificatifs`,`montantValide`,
 --
 
 INSERT INTO `LigneFraisForfait` (`idFicheFrais`,`idFraisForfait`,`quantite`) VALUES
-(1,4,3),
-(1,1,18),
-(1,2,18),
 (2,3,2),
 (2,1,2),
 (2,4,2);

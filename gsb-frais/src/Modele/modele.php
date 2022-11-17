@@ -2,6 +2,8 @@
 
 namespace App\Modele;
 use PDOException;
+use App\Controller;
+
 require_once("ConnexionBDD.php");
 
 /*------------------------------FRAISFORFAIT------------------------------*/
@@ -24,7 +26,7 @@ function getFraisForfait(){
 function getVisiteurAll() {
     try{
         $connexion = ConnexionBDD::getConnexion();
-        $query = " SELECT * FROM Visiteur ";
+        $query = " SELECT idVisiteur FROM Visiteur ";
         $visiteurs = $connexion->prepare($query);
         $visiteurs->execute();
         $visiteursFetch = $visiteurs->fetchAll();
@@ -34,6 +36,21 @@ function getVisiteurAll() {
     }catch(PDOException $e){
         die();
         return "BALISE ERREUR" . $e->getMessage();
+    }
+}
+/*
+RECUPERATION TOUTES LES MOIS FICHE FRAIS
+ */
+function getAllMoisFicheFrais(){
+    try{
+        $connexion = ConnexionBDD::getConnexion();
+        $query = "SELECT mois FROM FicheFrais ";
+        $idFicheFrais = $connexion->prepare($query);
+        $idFicheFrais->execute();
+        $idFicheFraisFetch = $idFicheFrais->fetchAll();
+        return $idFicheFraisFetch;
+    }catch(PDOException $e){
+        echo $e->getMessage();
     }
 }
 /*
@@ -292,7 +309,9 @@ function loginComptable($login, $mdp){
         echo $e->getMessage();
     }
 }
-
+/*
+ MODIFICATION DE LETAT LIGNE FRAIS HORS FORFAIT
+*/
 function modifierEtatLigneFraisHorsForfait($visiteur, $mois, $libelle, $etat){
     try{
         $connexion = ConnexionBDD::getConnexion();
@@ -309,10 +328,49 @@ function modifierEtatLigneFraisHorsForfait($visiteur, $mois, $libelle, $etat){
             ":libelle" => $libelle,
             ":etat" => $etat
         ));
-        return 1;
-
     }catch(PDOException $e){
         echo $e->getMessage();
     }
 }
+
+function modifierEtatComptableFicheFrais($visiteur, $mois, $etat){
+    try{
+        $connexion = ConnexionBDD::getConnexion();
+        $ficheFrais = getFicheFraisForVisiteurAndMois($visiteur, $mois);
+        $idFicheFrais = $ficheFrais[0]['idFicheFrais'];
+
+        $query = "UPDATE FicheFrais "
+                ."SET idEtatComptable = :idEtat "
+                ."WHERE idFicheFrais = :idFicheFrais ";
+
+        $modifier = $connexion->prepare($query);
+        $modifier->execute(array(
+            ":idEtat" => $etat,
+            ":idFicheFrais" => $idFicheFrais
+        ));
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+function modifierEtatVisiteurFicheFrais($visiteur, $mois, $etat){
+    try{
+        $connexion = ConnexionBDD::getConnexion();
+        $ficheFrais = getFicheFraisForVisiteurAndMois($visiteur, $mois);
+        $idFicheFrais = $ficheFrais[0]['idFicheFrais'];
+
+        $query = "UPDATE FicheFrais "
+                ."SET idEtatVisiteur = :idEtat "
+                ."WHERE idFicheFrais = :idFicheFrais ";
+
+        $modifier = $connexion->prepare($query);
+        $modifier->execute(array(
+            ":idEtat" => $etat,
+            ":idFicheFrais" => $idFicheFrais
+        ));
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
 ?>
