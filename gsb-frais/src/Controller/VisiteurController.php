@@ -2,6 +2,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Fraisforfait;
+use App\Entity\Lignefraisforfait;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -51,14 +53,14 @@ class VisiteurController extends AbstractController
 
         $session = $request->getSession();
 
-        Modele\getLigneFraisForfait($session->get("id"), date('Y-m'));
-
         $fraisForfait = Modele\getFraisForfait();
-
+        $ligneFraisForfait = Modele\getLigneFraisForfait($session->get("id"), date('Y-m'));
+        
         return $this->render('visiteur\vueFiche.html.twig',
         [
             'controller' => 'VisiteurController::page_frais',
             'fraisForfait' => $fraisForfait,
+            'ligneFraisForfait' => $ligneFraisForfait,
         ]
         );
     }

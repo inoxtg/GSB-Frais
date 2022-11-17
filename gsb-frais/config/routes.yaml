@@ -3,7 +3,7 @@ accueil:
     controller: App\Controller\AcceuilController::accueil
 
 deconnexion:
-    path: /logout
+    path: /deconnexion
     controller: App\Controller\AcceuilController::deconnexion
 
 visiteur_historique:
