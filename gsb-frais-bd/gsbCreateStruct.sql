@@ -30,13 +30,26 @@ CREATE TABLE IF NOT EXISTS `FraisForfait` (
 -- --------------------------------------------------------
 
 --
--- Structure de la table `Etat`
+-- Structure de la table `EtatVisiteur`
 --
 
-CREATE TABLE IF NOT EXISTS `Etat` (
-  `idEtat` int NOT NULL auto_increment,
+CREATE TABLE IF NOT EXISTS `EtatVisiteur` (
+  `idEtatVisiteur` int NOT NULL auto_increment,
   `libelle` varchar(30) DEFAULT NULL,
-  PRIMARY KEY (`idEtat`)
+  PRIMARY KEY (`idEtatVisiteur`)
+) ENGINE=InnoDB;
+
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `EtatComptable`
+--
+
+CREATE TABLE IF NOT EXISTS `EtatComptable` (
+  `idEtatComptable` int NOT NULL auto_increment,
+  `libelle` varchar(30) DEFAULT NULL,
+  PRIMARY KEY (`idEtatComptable`)
 ) ENGINE=InnoDB;
 
 -- --------------------------------------------------------
@@ -91,10 +104,12 @@ CREATE TABLE IF NOT EXISTS `FicheFrais` (
   `nbJustificatifs` int(11) DEFAULT NULL,
   `montantValide` decimal(10,2) DEFAULT NULL,
   `dateModif` date DEFAULT NULL,
-  `idEtat` int not null default 2,
+  `idEtatComptable` int not null default 1,
+  `idEtatVisiteur` int not null default 2,
   `idComptable` int not null default 1,
   PRIMARY KEY (`idFicheFrais`),
-  FOREIGN KEY (`idEtat`) REFERENCES Etat(`idEtat`),
+  FOREIGN KEY (`idEtatComptable`) REFERENCES EtatComptable(`idEtatComptable`),
+  FOREIGN KEY (`idEtatVisiteur`) REFERENCES EtatVisiteur(`idEtatVisiteur`),
   FOREIGN KEY (`idVisiteur`) REFERENCES Visiteur(`idVisiteur`) ON DELETE CASCADE,
   FOREIGN KEY (`idComptable`) REFERENCES Comptable(`idComptable`)
 ) ENGINE=InnoDB;

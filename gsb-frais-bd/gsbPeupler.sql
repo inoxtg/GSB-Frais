@@ -3,7 +3,8 @@ DELETE FROM `LigneFraisHorsForfait`;
 DELETE FROM `LigneFraisForfait`;
 DELETE FROM `FicheFrais`;
 DELETE FROM `FraisForfait`;
-DELETE FROM `Etat`;
+DELETE FROM `EtatVisiteur`;
+DELETE FROM `EtatComptable`;
 DELETE FROM `Visiteur`;
 DELETE FROM `Comptable`;
 
@@ -22,13 +23,21 @@ INSERT INTO `FraisForfait` (`libelle`, `montant`) VALUES
 ('Repas Restaurant', 25.00);
 -- --------------------------------------------------------
 --
--- Contenu de la table `Etat`
+-- Contenu de la table `EtatVisiteur`
 --
 
-INSERT INTO `Etat` (`libelle`) VALUES
-('Remboursée'),
+INSERT INTO `EtatVisiteur` (`libelle`) VALUES
 ('Saisie clôturée'),
-('Fiche créée, saisie en cours'),
+('Fiche créée, saisie en cours');
+
+-- --------------------------------------------------------
+--
+-- Contenu de la table `EtatComptable`
+--
+
+INSERT INTO `EtatComptable` (`libelle`) VALUES
+('En attente de validation'),
+('Remboursée'),
 ('Validée et mise en paiement');
 -- --------------------------------------------------------
 
@@ -78,11 +87,11 @@ INSERT INTO `Comptable` (`nom`, `prenom`, `login`, `mdp`, `adresse`, `cp`, `vill
 -- Contenu de la table `FicheFrais`
 --
 
-INSERT INTO `FicheFrais` (`idVisiteur`,`mois`,`nbJustificatifs`,`montantValide`,`idEtat`,`idComptable`) VALUES
-(1,'2022-10',0,0,1,1),
-(5,'2022-10',0,0,1,1),
-(3,'2022-10',0,0,1,1),
-(1,'2022-09',0,0,1,1);
+INSERT INTO `FicheFrais` (`idVisiteur`,`mois`,`nbJustificatifs`,`montantValide`,`idEtatComptable`,`idEtatVisiteur`,`idComptable`) VALUES
+(1,'2022-10',0,0,1,1,1),
+(5,'2022-10',0,0,3,1,1),
+(3,'2022-10',0,0,3,2,1),
+(1,'2022-09',0,0,1,2,1);
 -- --------------------------------------------------------
 
 --
