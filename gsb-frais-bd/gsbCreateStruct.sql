@@ -91,7 +91,7 @@ CREATE TABLE IF NOT EXISTS `FicheFrais` (
   `nbJustificatifs` int(11) DEFAULT NULL,
   `montantValide` decimal(10,2) DEFAULT NULL,
   `dateModif` date DEFAULT NULL,
-  `idEtat` int not null default 1,
+  `idEtat` int not null default 2,
   `idComptable` int not null default 1,
   PRIMARY KEY (`idFicheFrais`),
   FOREIGN KEY (`idEtat`) REFERENCES Etat(`idEtat`),
