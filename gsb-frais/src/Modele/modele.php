@@ -2,7 +2,6 @@
 
 namespace App\Modele;
 use PDOException;
-use App\Controller;
 
 require_once("ConnexionBDD.php");
 
