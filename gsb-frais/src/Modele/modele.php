@@ -305,7 +305,7 @@ function removeLigneFraisHorsForfait($visiteur, $mois, $libelle){
         echo $e->getMessage();
     }
 }
-function removeALLLigneFraisForfait($visiteur, $mois){
+function removeALLLigneFraisHorsForfait($visiteur, $mois){
     try{
         $connexion = ConnexionBDD::getConnexion();
         $ficheFrais = getFicheFraisForVisiteurAndMois($visiteur, $mois);
