@@ -104,9 +104,11 @@ class VisiteurController extends AbstractController
             Modele\modifierLigneFraisForfait($session->get("id"), date('Y-m'), $index,$fraisForfait);
         }
 
-        foreach($_POST["frais_hors_forfait"] as $index=>$fraisHosrForfait)
+        Modele\RemoveAllLigneFraisHorsForfait($session->get("id"), date('Y-m'));
+
+        foreach($_POST["frais_hors_forfait"] as $index=>$fraisHorsForfait)
         {
-            Modele\createLigneHorsForfait($session->get("id"), date('Y-m'), $fraisHosrForfait["libelle"], $fraisHosrForfait["input"], $fraisHosrForfait["date"]);
+            Modele\createLigneHorsForfait($session->get("id"), date('Y-m'), $fraisHorsForfait["libelle"], $fraisHorsForfait["input"], $fraisHorsForfait["date"]);
         }
         
         return $this->redirectToRoute('visiteur_frais');
