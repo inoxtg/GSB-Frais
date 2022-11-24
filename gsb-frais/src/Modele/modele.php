@@ -60,7 +60,7 @@ function getAllFicheFraisForVisiteur($idVisiteur){
         $connexion = ConnexionBDD::getConnexion();
         $query = "SELECT * FROM FicheFrais "
                 ."WHERE idVisiteur = :idVisiteur "
-                ."ORDER BY mois ASC ";
+                ."ORDER BY mois DESC ";
         $fichesFrais = $connexion->prepare($query);
         $fichesFrais->execute(array(
             ":idVisiteur" => $idVisiteur
@@ -240,7 +240,7 @@ function modifierLigneFraisForfait($idvisiteur, $mois, $idFraisForfait, $quantit
 /*
  RECUPERATION LIGNES HORS FORFAIT FOR VISITEUR AND MOIS
  */
-function getLigneHorsForfaitAndFicheFraisForVisiteurAndMois($idVisiteur, $mois){
+function getLigneHorsForfaitAndFicheFrais($idVisiteur, $mois){
     try{
         $connexion = ConnexionBDD::getConnexion();
         if(existsFicheFraisForVisiteurAndMois($idVisiteur, $mois)){

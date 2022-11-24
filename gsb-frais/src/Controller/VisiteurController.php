@@ -66,6 +66,8 @@ class VisiteurController extends AbstractController
 
     public function page_frais(Request $request): Response
     {
+        $date = date('Y-m');
+        $idsTable = Modele\getIdFicheFraisMauvaisEtat($date);
 
         $date = date('Y-m');
         $idsTable = Modele\getIdFicheFraisMauvaisEtat($date);
