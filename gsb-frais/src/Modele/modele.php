@@ -266,36 +266,6 @@ function getLigneHorsForfaitAndFicheFrais($idVisiteur, $mois){
 /*
  CREATION LIGNE FRAIS HORS FORFAIT
  */
-
-/*
- EXISTE LIBELLE ?
-    SI OUI : ERREUR
-    SI NON : CREATION
- */
-function existsLibelleLigneFraisHorsForfaitFicheFrais($libelle, $idVisiteur, $mois){
-    try{
-        $connexion = ConnexionBDD::getConnexion();
-        $ficheFrais = getFicheFraisForVisiteurAndMois($idVisiteur, $mois);
-        $idFicheFrais = $ficheFrais[0]['idFicheFrais'];
-
-        $query = "SELECT ("
-                ."EXISTS ("
-                ."SELECT * "
-                ."FROM LigneFraisHorsForfait "
-                ."WHERE libelle = :libelle AND idFicheFrais = :idFicheFrais )) AS bool ";
-        $requete = $connexion->prepare($query);
-        $requete->execute(array(
-           ":libelle" => $libelle,
-           ":idFicheFrais" => $idFicheFrais
-        ));
-
-        $resultatTable = $requete->fetchAll();
-        return $resultatTable[0]['bool'];
-
-    }catch(PDOException $e){
-        echo $e->getMessage();
-    }
-}
 function createLigneHorsForfait($idVisiteur, $mois, $libelle, $montant, $date){
     try{
         $connexion = ConnexionBDD::getConnexion();
