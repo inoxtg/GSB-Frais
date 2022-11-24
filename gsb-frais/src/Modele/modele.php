@@ -22,7 +22,7 @@ function getLibelleFraisForfaitById($id){
     try{
         $connexion = ConnexionBDD::getConnexion();
         $query = "SELECT libelle FROM FraisForfait "
-                ."WHERE idFraisForfait :id ";
+                ."WHERE idFraisForfait = :id ";
         $libelleFraisForfait = $connexion->prepare($query);
         $libelleFraisForfait->execute( array(
             ":id" => $id
@@ -350,6 +350,9 @@ function modifierEtatLigneFraisHorsForfait($visiteur, $mois, $libelle, $etat){
         echo $e->getMessage();
     }
 }
+/*
+ MODIFIER ETAT COMPTABLE DE FICHE FRAIS ( POUR COMPTABLE )
+ */
 
 function modifierEtatComptableFicheFrais($visiteur, $mois, $etat){
     try{
@@ -371,36 +374,36 @@ function modifierEtatComptableFicheFrais($visiteur, $mois, $etat){
     }
 }
 /*
+ GET ET MODIFIER ETAT VISITEUR DE FICHEFRAIS !!!!!!!!!!!!AUTOMATIQUE!!!!!!!!!!!! VOIR ACCUEIL CONTROLLER
+ */
+
 function getIdFicheFraisMauvaisEtat($date){
     try{
         $connexion = ConnexionBDD::getConnexion();
         $query = "SELECT idFicheFrais "
                 ."FROM FicheFrais "
-                ."WHERE mois < $date ";
+                ."WHERE mois < :date ";
         $idFicheFrais = $connexion->prepare($query);
-        $i
+        $idFicheFrais->execute(array(
+           ":date" => $date
+        ));
+        $idFicheFraisFecth = $idFicheFrais->fetchAll();
 
+        return $idFicheFraisFecth;
     }catch(PDOException $e){
         echo $e->getMessage();
     }
 }
-*/
 
-
-function modifierEtatVisiteurFicheFrais($visiteur, $mois, $etat){
+function modifierEtatVisiteurFicheFrais($idFiche){
     try{
         $connexion = ConnexionBDD::getConnexion();
-        $ficheFrais = getFicheFraisForVisiteurAndMois($visiteur, $mois);
-        $idFicheFrais = $ficheFrais[0]['idFicheFrais'];
-
         $query = "UPDATE FicheFrais "
-                ."SET idEtatVisiteur = :idEtat "
-                ."WHERE idFicheFrais = :idFicheFrais ";
-
+                ."SET idEtatVisiteur = 1 "
+                ."WHERE idFicheFrais = :idFiche ";
         $modifier = $connexion->prepare($query);
         $modifier->execute(array(
-            ":idEtat" => $etat,
-            ":idFicheFrais" => $idFicheFrais
+            ":idFiche" => $idFiche
         ));
     }catch(PDOException $e){
         echo $e->getMessage();

@@ -54,11 +54,19 @@ class VisiteurController extends AbstractController
 
     public function page_frais(Request $request): Response
     {
+        $date = date('Y-m');
+        $idsTable = Modele\getIdFicheFraisMauvaisEtat($date);
+
+        foreach ( $idsTable as $ids){
+            foreach( $ids as $id ){
+                Modele\modifierEtatVisiteurFicheFrais($id);
+            }
+        }
 
         $session = $request->getSession();
 
         $fraisForfait = Modele\getFraisForfait();
-        $ligneFraisForfait = Modele\getLigneFraisForfait($session->get("id"), date('Y-m'));
+        $ligneFraisForfait = Modele\getLigneFraisForfait($session->get("id"), $date);
         
         return $this->render('visiteur\vueFiche.html.twig',
         [
