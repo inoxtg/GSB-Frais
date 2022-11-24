@@ -18,6 +18,21 @@ function getFraisForfait(){
         echo $e->getMessage();
     }
 }
+function getLibelleFraisForfaitById($id){
+    try{
+        $connexion = ConnexionBDD::getConnexion();
+        $query = "SELECT libelle FROM FraisForfait "
+                ."WHERE idFraisForfait :id ";
+        $libelleFraisForfait = $connexion->prepare($query);
+        $libelleFraisForfait->execute( array(
+            ":id" => $id
+        ));
+        $fraisForfaitFetch = $libelleFraisForfait->fetchAll();
+        return $fraisForfaitFetch;
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
 /*------------------------------VISITEUR------------------------------*/
 /*
  RECUPERATION TOUS LES VISITEURS
@@ -44,7 +59,8 @@ function getAllFicheFraisForVisiteur($idVisiteur){
     try{
         $connexion = ConnexionBDD::getConnexion();
         $query = "SELECT * FROM FicheFrais "
-                ."WHERE idVisiteur = :idVisiteur ";
+                ."WHERE idVisiteur = :idVisiteur "
+                ."ORDER BY mois ASC ";
         $fichesFrais = $connexion->prepare($query);
         $fichesFrais->execute(array(
             ":idVisiteur" => $idVisiteur
@@ -354,6 +370,22 @@ function modifierEtatComptableFicheFrais($visiteur, $mois, $etat){
         echo $e->getMessage();
     }
 }
+/*
+function getIdFicheFraisMauvaisEtat($date){
+    try{
+        $connexion = ConnexionBDD::getConnexion();
+        $query = "SELECT idFicheFrais "
+                ."FROM FicheFrais "
+                ."WHERE mois < $date ";
+        $idFicheFrais = $connexion->prepare($query);
+        $i
+
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+*/
+
 
 function modifierEtatVisiteurFicheFrais($visiteur, $mois, $etat){
     try{
