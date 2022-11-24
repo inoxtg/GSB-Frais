@@ -75,6 +75,7 @@ class VisiteurController extends AbstractController
 
     public function page_frais(Request $request): Response
     {
+
         $date = date('Y-m');
         $idsTable = Modele\getIdFicheFraisMauvaisEtat($date);
 
@@ -117,7 +118,13 @@ class VisiteurController extends AbstractController
 
         foreach($_POST["frais_hors_forfait"] as $index=>$fraisHorsForfait)
         {
-            Modele\createLigneHorsForfait($session->get("id"), date('Y-m'), $fraisHorsForfait["libelle"], $fraisHorsForfait["input"], $fraisHorsForfait["date"]);
+            $bool = Modele\existsLibelleLigneFraisHorsForfaitFicheFrais($session->get("id"), date('Y-m'), $fraisHorsForfait["libelle"]);
+            if($bool == 0 ){
+                Modele\createLigneHorsForfait($session->get("id"), date('Y-m'), $fraisHorsForfait["libelle"], $fraisHorsForfait["input"], $fraisHorsForfait["date"]);
+            }else{
+                $this->addFlash(
+                    'fail_add_lfhf', 'Libelle déjà existant');
+            }
         }
         
         return $this->redirectToRoute('visiteur_frais');

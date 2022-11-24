@@ -121,3 +121,4 @@ INSERT INTO `LigneFraisHorsForfait` (`idFicheFrais`,`libelle`,`montant`) VALUES
 (2,'TEST4',2),
 (2,'TEST5',2),
 (2,'TEST6',2);
+
