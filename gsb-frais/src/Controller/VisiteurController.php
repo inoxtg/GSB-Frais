@@ -72,6 +72,7 @@ class VisiteurController extends AbstractController
         $date = date('Y-m');
         $idsTable = Modele\getIdFicheFraisMauvaisEtat($date);
 
+        //Automatisation etat "saisie en cours" >>>>>>>>>>> "saisie terminée" tous les mois :) 
         foreach ( $idsTable as $ids){
             foreach( $ids as $id ){
                 Modele\modifierEtatVisiteurFicheFrais($id);
@@ -82,7 +83,7 @@ class VisiteurController extends AbstractController
 
         $fraisForfait = Modele\getFraisForfait();
         $ligneFraisForfait = Modele\getLigneFraisForfait($session->get("id"), $date);
-        $ligneFraisHorsForfait = Modele\getLigneHorsForfaitAndFicheFraisForVisiteurAndMois($session->get("id"), $date);
+        $ligneFraisHorsForfait = Modele\getLigneHorsForfaitAndFicheFrais($session->get("id"), $date);
 
         return $this->render('visiteur\vueFiche.html.twig',
         [
