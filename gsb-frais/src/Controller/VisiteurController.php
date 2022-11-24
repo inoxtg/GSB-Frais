@@ -44,16 +44,29 @@ class VisiteurController extends AbstractController
         $session = $request->getSession();
         $fichesFrais = Modele\getAllFicheFraisForVisiteur($session->get("id"));
 
+        foreach($fichesFrais as $index=>$uneFiche)
+        {
+            $fichesFrais[$index]["lignesFraisForfait"] = Modele\getLigneFraisForfait($uneFiche["idVisiteur"], $uneFiche["mois"]);
+            
+            foreach($fichesFrais[$index]["lignesFraisForfait"] as $ligneIndex=>$lignesFraisForfait)
+            {
+                $fichesFrais[$index]["lignesFraisForfait"][$ligneIndex]["fraisForfaitLibelle"] = Modele\getLibelleFraisForfaitById($fichesFrais[$index]["lignesFraisForfait"][$ligneIndex]["idFraisForfait"])[0]["libelle"];
+            }
+        }
+
+        //print("<pre>".print_r($fichesFrais,true)."</pre>");
+
         return $this->render('/visiteur/vueHistorique.html.twig',
         [
             'controller' => 'VisiteurController::historique',
-            'fichesFrais' => $fichesFrais
+            'fichesFrais' => $fichesFrais,
         ]
         );
     }
 
     public function page_frais(Request $request): Response
     {
+
         $date = date('Y-m');
         $idsTable = Modele\getIdFicheFraisMauvaisEtat($date);
 
@@ -67,12 +80,14 @@ class VisiteurController extends AbstractController
 
         $fraisForfait = Modele\getFraisForfait();
         $ligneFraisForfait = Modele\getLigneFraisForfait($session->get("id"), $date);
-        
+        $ligneFraisHorsForfait = Modele\getLigneHorsForfaitAndFicheFraisForVisiteurAndMois($session->get("id"), $date);
+
         return $this->render('visiteur\vueFiche.html.twig',
         [
             'controller' => 'VisiteurController::page_frais',
             'fraisForfait' => $fraisForfait,
             'ligneFraisForfait' => $ligneFraisForfait,
+            'ligneFraisHorsForfait' => $ligneFraisHorsForfait,
         ]
         );
     }
@@ -84,6 +99,11 @@ class VisiteurController extends AbstractController
         foreach($_POST["frais_forfait"] as $index=>$fraisForfait)
         {
             Modele\modifierLigneFraisForfait($session->get("id"), date('Y-m'), $index,$fraisForfait);
+        }
+
+        foreach($_POST["frais_hors_forfait"] as $index=>$fraisHosrForfait)
+        {
+            Modele\createLigneHorsForfait($session->get("id"), date('Y-m'), $fraisHosrForfait["libelle"], $fraisHosrForfait["input"], $fraisHosrForfait["date"]);
         }
         
         return $this->redirectToRoute('visiteur_frais');

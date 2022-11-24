@@ -23,15 +23,63 @@
             <div class="fiches_list">
                 <h1>Historique des Fiches</h1>
 
-                <button class="attente">Septembre 2022</button>
-                <button class="fini">Aout 2022</button>
+                {% for uneFiche in fichesFrais %}
+
+                <button 
+                class=
+                {% if uneFiche["idEtatComptable"] == 1 %}
+                    "attente"
+                {% elseif uneFiche["idEtatComptable"] == 2 %}
+                    "fini"
+                {% endif %}
+                >
+                    {{uneFiche["mois"]}}
+                </button>                
+
+                {% endfor %}
 
             </div>
         </div>
 
+        {% set selection = 0 %}
+
+        <div class="fiche_position">
+
+            <div class="fiche_frais">
+
+                <h1>Frais du mois de Novembre 2022</h1>
+
+                <div class="form_table">
+
+                    <table class="table_fiche">
+
+                        <thead>
+                            <tr>
+                                <th class="th_libelle">Frais Forfaitaire</th>
+                                <th class="th_quantite">Quantité</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+                            {% for uneLigne in fichesFrais[selection]["lignesFraisForfait"] %}
+                                <tr>
+                                    <td class="td_libelle">{{uneLigne["fraisForfaitLibelle"]}}</td>
+                                    <td class="td_input">
+                                        <input
+                                            input class="input_prix" type="number" 
+                                            value="{{uneLigne["quantite"]}}"
+                                            min="0"
+                                        >
+                                    </td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                
+                </div>
+            </div>
+        </div>
     </div>
-
-
 
 
 </body>
