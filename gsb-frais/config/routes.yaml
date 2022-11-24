@@ -18,7 +18,6 @@ visiteur_login:
     path: /visiteur/login
     controller: App\Controller\VisiteurController::login
 
-
 visiteur_reception_fiche:
     path: /visiteur/fiche/envoyer
     controller: App\Controller\VisiteurController::reception_fiche

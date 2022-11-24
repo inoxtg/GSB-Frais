@@ -6,6 +6,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Modele;
+use App\Technique;
 
 class ComptableController extends AbstractController
 {
@@ -14,7 +15,16 @@ class ComptableController extends AbstractController
 
         $identifiant = $_POST['identifiant'];
         $password = $_POST['password'];
-        $comptable = Modele\loginComptable($identifiant, $password);
+
+        if(Technique\regLettreChiffreOnly($identifiant) & Technique\regLettreChiffreOnly($password)){
+            $comptable = Modele\loginVisiteur($identifiant, $password);
+        }else{
+            $this->addFlash(
+                'fail_pssd_comptable', 'Identifiant ou mot de passe invalide REGEX'
+
+            );
+            return $this->redirectToRoute('accueil');
+        }
         if($comptable != null)
         {
             $session = $request->getSession();

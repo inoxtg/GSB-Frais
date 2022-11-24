@@ -7,6 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Modele;
+use App\Technique;
 
 class VisiteurController extends AbstractController
 {
@@ -14,7 +15,15 @@ class VisiteurController extends AbstractController
 
         $identifiant = $_POST['identifiant'];
         $password = $_POST['password'];
-        $visiteur = Modele\loginVisiteur($identifiant, $password);
+        if(Technique\regLettreChiffreOnly($identifiant) & Technique\regLettreChiffreOnly($password)){
+            $visiteur = Modele\loginVisiteur($identifiant, $password);
+        }else{
+            $this->addFlash(
+                'fail_pssd_visiteur', 'Identifiant ou mot de passe invalide REGEX'
+
+            );
+            return $this->redirectToRoute('accueil');
+        }
 
         if($visiteur != null)
         {
@@ -72,7 +81,7 @@ class VisiteurController extends AbstractController
         $date = date('Y-m');
         $idsTable = Modele\getIdFicheFraisMauvaisEtat($date);
 
-        //Automatisation etat "saisie en cours" >>>>>>>>>>> "saisie terminée" tous les mois :) 
+        //Automatisation etat "saisie en cours" >>>>>>>>>>> "saisie terminée" tous les mois :)
         foreach ( $idsTable as $ids){
             foreach( $ids as $id ){
                 Modele\modifierEtatVisiteurFicheFrais($id);
