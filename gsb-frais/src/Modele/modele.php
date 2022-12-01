@@ -49,8 +49,7 @@ function getVisiteurAll() {
         unset($visiteurs);
         return $visiteursFetch;
     }catch(PDOException $e){
-        die();
-        return "BALISE ERREUR" . $e->getMessage();
+        echo "BALISE ERREUR" . $e->getMessage();
     }
 }
 /*
@@ -71,8 +70,6 @@ function getAllDateVisiteurFicheFrais(){
         echo $e->getMessage();
     }
 }
-
-var_dump(getAllDateVisiteurFicheFrais());
 
 /*
 RECUPERATION TOUTES LES FICHES D'UN VISITEUR
@@ -279,7 +276,7 @@ function getLigneHorsForfaitAndFicheFrais($idVisiteur, $mois){
             return $ligneFraisHorsForfaitFecth;
         }else{
             createFicheFraisForVisiteurAndMois($idVisiteur, $mois);
-            return getLigneHorsForfaitAndFicheFraisForVisiteurAndMois($idVisiteur, $mois);
+            return getLigneHorsForfaitAndFicheFrais($idVisiteur, $mois);
         }
     }catch(PDOException $e){
         echo $e->getMessage();
@@ -340,9 +337,9 @@ function removeALLLigneFraisHorsForfait($visiteur, $mois){
             ":idFicheFrais" => $idFicheFrais,
     ));
 
-}catch(PDOException $e){
-    echo $e->getMessage();
-}
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
 }
 /*------------------------------COMPTABLE------------------------------*/
 
