@@ -17,7 +17,7 @@ class ComptableController extends AbstractController
         $password = $_POST['password'];
 
         if(Technique\regLettreChiffreOnly($identifiant) & Technique\regLettreChiffreOnly($password)){
-            $comptable = Modele\loginVisiteur($identifiant, $password);
+            $comptable = Modele\loginComptable($identifiant, $password);
         }else{
             $this->addFlash(
                 'fail_pssd_comptable', 'Identifiant ou mot de passe invalide REGEX'
@@ -45,11 +45,19 @@ class ComptableController extends AbstractController
         return $this->redirectToRoute('accueil');
     }
 
-    public function fiche(): Response // change func name
+    public function fiches(): Response // change func name
     {
+
+        $fiches = Modele\getAllDateVisiteurFicheFrais();
+
+
+        print(print_r($fiches));
+
+
         return $this->render('/comptable/vueFiches.html.twig',
         [
-            'controller' => 'ComptableController::fiche', // change func name
+            'controller' => 'ComptableController::fiches',
+            'liste_fiches' => $fiches,
         ]
         );
     }

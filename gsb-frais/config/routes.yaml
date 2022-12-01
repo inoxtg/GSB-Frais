@@ -21,3 +21,13 @@ visiteur_login:
 visiteur_reception_fiche:
     path: /visiteur/fiche/envoyer
     controller: App\Controller\VisiteurController::reception_fiche
+
+
+
+comptable_login:
+    path: /comptable/login
+    controller: App\Controller\ComptableController::login
+
+comptable_frais:
+    path: /comptable/fiches
+    controller: App\Controller\ComptableController::fiches

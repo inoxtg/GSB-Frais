@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="{{ asset('styles/vueFicheComptable.css')}}" rel="stylesheet" type="text/css">
     <title>Comptable - Pannel</title>
     <script src="https://kit.fontawesome.com/d84560b21a.js" crossorigin="anonymous"></script>
 </head>
@@ -25,20 +26,6 @@
             <div class="fiches_list">
                 <h1>Regroupé par mois</h1>
 
-                {% for uneFiche in fichesFrais %}
-
-                <button 
-                class=
-                {% if uneFiche["idEtatComptable"] == 1 %}
-                    "attente"
-                {% elseif uneFiche["idEtatComptable"] == 2 %}
-                    "fini"
-                {% endif %}
-                >
-                    {{uneFiche["mois"]}}
-                </button>                
-
-                {% endfor %}
 
             </div>
         </div>
