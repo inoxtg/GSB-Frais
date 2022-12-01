@@ -90,6 +90,7 @@ class VisiteurController extends AbstractController
         $fraisForfait = Modele\getFraisForfait();
         $ligneFraisForfait = Modele\getLigneFraisForfait($session->get("id"), $date);
         $ligneFraisHorsForfait = Modele\getLigneHorsForfaitAndFicheFrais($session->get("id"), $date);
+        $etats = Modele\getEtatsFicheFrais($session->get("id"), $date);
 
         return $this->render('visiteur\vueFiche.html.twig',
         [
@@ -99,6 +100,7 @@ class VisiteurController extends AbstractController
             'ligneFraisHorsForfait' => $ligneFraisHorsForfait,
             'mois' => date('F Y', strtotime($date)),
             'visiteur' => strtoupper($session->get("nom")) . " " . $session->get("prenom"),
+            'etats' => $etats,
         ]
         );
     }

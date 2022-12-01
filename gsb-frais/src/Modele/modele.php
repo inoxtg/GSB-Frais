@@ -35,6 +35,7 @@ function getLibelleFraisForfaitById($id){
     }
 }
 /*------------------------------VISITEUR------------------------------*/
+
 /*
  RECUPERATION TOUS LES VISITEURS
  */
@@ -164,8 +165,8 @@ function getFicheFraisForVisiteurAndMois($idvisiteur, $mois){
         if(existsFicheFraisForVisiteurAndMois($idvisiteur, $mois) == 1 ){
             $connexion = ConnexionBDD::getConnexion();
             $query = "SELECT * FROM FicheFrais "
-                ."WHERE `idVisiteur` = :idVisiteur "
-                ."AND `mois` = :mois ";
+                    ."WHERE `idVisiteur` = :idVisiteur "
+                    ."AND `mois` = :mois ";
             $ficheFrais = $connexion->prepare($query);
             $ficheFrais->execute(array(
                 ":idVisiteur" => $idvisiteur,
@@ -341,6 +342,29 @@ function removeALLLigneFraisHorsForfait($visiteur, $mois){
         echo $e->getMessage();
     }
 }
+/*
+ RECUPERATION ETAT VISITEUR ET ETAT COMPTABLE FICHE
+*/
+function getEtatsFicheFrais($idVisiteur, $mois){
+    try{
+        $connexion = ConnexionBDD::getConnexion();
+        $ficheFrais = getFicheFraisForVisiteurAndMois($idVisiteur, $mois);
+        $idFicheFrais = $ficheFrais[0]['idFicheFrais'];
+        $query = "SELECT EtatComptable.libelle, EtatVisiteur.libelle "
+                ."FROM FicheFrais "
+                ."JOIN EtatComptable ON EtatComptable.idEtatComptable = FicheFrais.idEtatComptable "
+                ."JOIN EtatVisiteur ON EtatVisiteur.idEtatVisiteur = FicheFrais.idEtatVisiteur "
+                ."WHERE FicheFrais.idFicheFrais = :idFicheFrais ";
+        $etats = $connexion->prepare($query);
+        $etats->execute(array(
+            ":idFicheFrais" => $idFicheFrais
+        ));
+        $etatsFetch = $etats->fetchAll();
+        return $etatsFetch;
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
 /*------------------------------COMPTABLE------------------------------*/
 
 function loginComptable($login, $mdp){
@@ -410,7 +434,8 @@ function modifierEtatComptableFicheFrais($visiteur, $mois, $etat){
     }
 }
 /*
- GET ET MODIFIER ETAT VISITEUR DE FICHEFRAIS !!!!!!!!!!!!AUTOMATIQUE!!!!!!!!!!!! VOIR ACCUEIL CONTROLLER
+ GET ET MODIFIER ETAT VISITEUR DE FICHEFRAIS EN AUTO
+   GGET VOIR VISITEUR CONTROLLER / page_frais
  */
 
 function getIdFicheFraisMauvaisEtat($date){

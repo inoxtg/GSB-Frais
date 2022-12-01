@@ -5,14 +5,13 @@ function add_frais()
     nb_input = table.rows.length-2;
     
     input_value = "";
-    if(nb_input > 0)
+    if(nb_input > -1)
     {
       var row = table.getElementsByTagName("tr")[table.rows.length - 1];
       colum = row.getElementsByTagName("td")[0];
 
       input_value = colum.getElementsByTagName("input")[0].value;
     }
-
     if(input_value != "" || nb_input == -1)
     {
         nb_input++;

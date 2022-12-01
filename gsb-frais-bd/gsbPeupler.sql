@@ -30,7 +30,7 @@ INSERT INTO `FraisForfait` (`libelle`, `montant`) VALUES
 
 INSERT INTO `EtatVisiteur` (`libelle`) VALUES
 ('Saisie clôturée'),
-('Fiche créée, saisie en cours');
+('Saisie en cours');
 
 -- --------------------------------------------------------
 --
