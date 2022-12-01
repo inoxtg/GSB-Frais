@@ -62,7 +62,7 @@ function getAllDateVisiteurFicheFrais(){
         $query = "SELECT FicheFrais.mois, FicheFrais.idVisiteur, Visiteur.nom, Visiteur.prenom "
                 ."FROM FicheFrais "
                 ."JOIN Visiteur on FicheFrais.idVisiteur = Visiteur.idVisiteur "
-                ."ORDER BY FicheFrais.mois ";
+                ."ORDER BY Visiteur.nom ASC, FicheFrais.mois DESC ";
         $dates = $connexion->prepare($query);
         $dates->execute();
         $datesFetch = $dates->fetchAll();
