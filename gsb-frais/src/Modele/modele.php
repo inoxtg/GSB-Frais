@@ -6,6 +6,7 @@ use PDOException;
 require_once("ConnexionBDD.php");
 
 /*------------------------------FRAISFORFAIT------------------------------*/
+
 function getFraisForfait(){
     try{
         $connexion = ConnexionBDD::getConnexion();
@@ -58,10 +59,10 @@ RECUPERATION TOUTES LES DATES ET VISITEURS DE TOUTES LES FICHESFRAIS :
 function getAllDateVisiteurFicheFrais(){
     try{
         $connexion = ConnexionBDD::getConnexion();
-        $query = "SELECT ff.mois, ff.idVisiteur, V.nom, V.prenom "
-                ."FROM FicheFrais ff"
-                ."JOIN Visiteur V on ff.idVisiteur = V.idVisiteur "
-                ."ORDER BY ff.mois ";
+        $query = "SELECT FicheFrais.mois, FicheFrais.idVisiteur, Visiteur.nom, Visiteur.prenom "
+                ."FROM FicheFrais "
+                ."JOIN Visiteur on FicheFrais.idVisiteur = Visiteur.idVisiteur "
+                ."ORDER BY FicheFrais.mois ";
         $dates = $connexion->prepare($query);
         $dates->execute();
         $datesFetch = $dates->fetchAll();
@@ -70,6 +71,8 @@ function getAllDateVisiteurFicheFrais(){
         echo $e->getMessage();
     }
 }
+
+var_dump(getAllDateVisiteurFicheFrais());
 
 /*
 RECUPERATION TOUTES LES FICHES D'UN VISITEUR

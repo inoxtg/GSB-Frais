@@ -1,4 +1,5 @@
 use gsb;
+
 DELETE FROM `LigneFraisHorsForfait`;
 DELETE FROM `LigneFraisForfait`;
 DELETE FROM `FicheFrais`;
