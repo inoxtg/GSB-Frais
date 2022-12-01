@@ -3,11 +3,13 @@
 namespace App\Controller;
 
 
+use PhpParser\Node\Expr\Cast\Array_;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use App\Modele;
 use App\Technique;
+use Symfony\Component\Validator\Constraints\Length;
 
 class VisiteurController extends AbstractController
 {
@@ -48,7 +50,6 @@ class VisiteurController extends AbstractController
     
     public function historique(Request $request): Response
     {
-        // get historique
 
         $session = $request->getSession();
         $fichesFrais = Modele\getAllFicheFraisForVisiteur($session->get("id"));
@@ -75,6 +76,7 @@ class VisiteurController extends AbstractController
 
     public function page_frais(Request $request): Response
     {
+
         $date = date('Y-m');
         $idsTable = Modele\getIdFicheFraisMauvaisEtat($date);
 
@@ -103,6 +105,7 @@ class VisiteurController extends AbstractController
 
     public function reception_fiche(Request $request)
     {
+
         $session = $request->getSession();
 
         foreach($_POST["frais_forfait"] as $index=>$fraisForfait)
@@ -112,11 +115,21 @@ class VisiteurController extends AbstractController
 
         Modele\RemoveAllLigneFraisHorsForfait($session->get("id"), date('Y-m'));
 
-        foreach($_POST["frais_hors_forfait"] as $index=>$fraisHorsForfait)
-        {
-            Modele\createLigneHorsForfait($session->get("id"), date('Y-m'), $fraisHorsForfait["libelle"], $fraisHorsForfait["input"], $fraisHorsForfait["date"]);
-        }
 
+        $listLibelle = array();
+        if(!empty($_POST["frais_hors_forfait"]))
+        {        
+            foreach($_POST["frais_hors_forfait"] as $index=>$fraisHorsForfait)
+            {
+                if( !in_array($fraisHorsForfait["libelle"], $listLibelle) && strlen($fraisHorsForfait["libelle"]) !== 0) // unique libelle
+                {
+                    array_push($listLibelle, $fraisHorsForfait["libelle"]);
+                
+                    Modele\createLigneHorsForfait($session->get("id"), date('Y-m'), $fraisHorsForfait["libelle"], $fraisHorsForfait["input"], $fraisHorsForfait["date"]);
+            
+                }
+            }
+        }
         return $this->redirectToRoute('visiteur_frais');
     }
 }
