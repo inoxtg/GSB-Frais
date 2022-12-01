@@ -100,8 +100,9 @@ INSERT INTO `Comptable` (`nom`, `prenom`, `login`, `mdp`, `adresse`, `cp`, `vill
 
 INSERT INTO `FicheFrais` (`idVisiteur`,`mois`,`nbJustificatifs`,`montantValide`,`idEtatComptable`,`idEtatVisiteur`,`idComptable`) VALUES
 (1,'2022-11',0,0,1,1,1),
-(5,'2022-10',0,0,3,1,1),
-(3,'2022-10',0,0,3,2,1),
+(1,'2022-10',0,0,1,1,1),
+(5,'2022-10',0,0,2,1,1),
+(3,'2022-10',0,0,2,2,1),
 (1,'2022-09',0,0,1,2,1);
 -- --------------------------------------------------------
 
@@ -113,12 +114,17 @@ INSERT INTO `LigneFraisForfait` (`idFicheFrais`,`idFraisForfait`,`quantite`) VAL
 (2,3,2),
 (2,1,2),
 (2,4,2);
+-- --------------------------------------------------------
+
+--
+-- Contenu de la table `LigneFraisHorsForfait`
+--
 
 INSERT INTO `LigneFraisHorsForfait` (`idFicheFrais`,`libelle`,`montant`) VALUES
-(1,'TEST1',25),
-(1,'TEST2',36),
-(1,'TEST3',15),
-(2,'TEST4',2),
-(2,'TEST5',2),
-(2,'TEST6',2);
+(1,'TEST1 - 1',25),
+(1,'TEST2 - 1',36),
+(1,'TEST3 - 1',15),
+(2,'TEST4 - 2',2),
+(2,'TEST5 - 2',2),
+(3,'TEST6 - 3',18);
 

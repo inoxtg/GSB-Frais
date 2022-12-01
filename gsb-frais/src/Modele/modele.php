@@ -53,6 +53,24 @@ function getVisiteurAll() {
     }
 }
 /*
+RECUPERATION TOUTES LES DATES DE TOUTES LES FICHESFRAIS :
+*/
+function getAllDateFicheFrais(){
+    try{
+        $connexion = ConnexionBDD::getConnexion();
+        $query = "SELECT mois "
+                ."FROM FicheFrais ";
+        $dates = $connexion->prepare($query);
+        $dates->execute();
+        $datesFetch = $dates->fetchAll();
+        return $datesFetch;
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
+
+/*
 RECUPERATION TOUTES LES FICHES D'UN VISITEUR
 */
 function getAllFicheFraisForVisiteur($idVisiteur){
@@ -426,5 +444,47 @@ function modifierEtatVisiteurFicheFrais($idFiche){
         echo $e->getMessage();
     }
 }
+
+
+/* COMPTABLE : get lff et get lfhf for visiteur OU visiteur + mois OU mois OU rien( all) */
+
+// mois
+
+function getLFHFByMois($mois){
+    try{
+        $connexion = ConnexionBDD::getConnexion();
+        $query = "SELECT LFHF.libelle, LFHF.montant, ff.idVisiteur, ff.mois "
+                ."FROM FicheFrais ff "
+                ."JOIN LigneFraisHorsForfait LFHF on ff.idFicheFrais = LFHF.idFicheFrais "
+                ."WHERE ff.mois LIKE :mois ";
+        $lfhf = $connexion->prepare($query);
+        $lfhf->execute(array(
+            ":mois" => $mois
+        ));
+        $lfhfFetch = $lfhf->fetchAll();
+        return $lfhfFetch;
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+function getLFFByMois($mois){
+    try{
+        $connexion = ConnexionBDD::getConnexion();
+        $query = "SELECT LFF.quantite, ff.libelle,ff.montant, FF.idVisiteur, FF.mois "
+                ."FROM FicheFrais FF "
+                ."JOIN LigneFraisForfait LFF on FF.idFicheFrais = LFF.idFicheFrais "
+                ."JOIN FraisForfait ff on LFF.idFraisForfait = ff.idFraisForfait "
+                ."WHERE FF.mois = :mois ";
+        $lff = $connexion->prepare($query);
+        $lff->execute(array(
+            ":mois" => $mois
+        ));
+        $lffFecth = $lff->fetchAll();
+        return $lffFecth;
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
 
 ?>
