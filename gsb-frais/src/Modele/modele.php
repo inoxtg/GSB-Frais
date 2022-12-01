@@ -53,17 +53,19 @@ function getVisiteurAll() {
     }
 }
 /*
-RECUPERATION TOUTES LES DATES DE TOUTES LES FICHESFRAIS :
+RECUPERATION TOUTES LES DATES ET VISITEURS DE TOUTES LES FICHESFRAIS :
 */
-function getAllDateFicheFrais(){
+function getAllDateVisiteurFicheFrais(){
     try{
         $connexion = ConnexionBDD::getConnexion();
-        $query = "SELECT mois, idVisiteur "
-                ."FROM FicheFrais ";
+        $query = "SELECT ff.mois, ff.idVisiteur, V.nom, V.prenom "
+                ."FROM FicheFrais ff"
+                ."JOIN Visiteur V on ff.idVisiteur = V.idVisiteur "
+                ."ORDER BY ff.mois ";
         $dates = $connexion->prepare($query);
         $dates->execute();
         $datesFetch = $dates->fetchAll();
-        return $datesFetch-10;
+        return $datesFetch;
     }catch(PDOException $e){
         echo $e->getMessage();
     }
