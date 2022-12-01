@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link href="{{ asset('styles/vueFicheComptable.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('styles/vueFichesComptable.css')}}" rel="stylesheet" type="text/css">
     <title>Comptable - Pannel</title>
     <script src="https://kit.fontawesome.com/d84560b21a.js" crossorigin="anonymous"></script>
 </head>
@@ -21,15 +21,38 @@
 
     <div class="page">
 
-
         <div class="fiches_list_position">
             <div class="fiches_list">
+
                 <h1>Regroupé par mois</h1>
 
 
+                <form class="form_search" action="/comptable/fiche/search">
+
+                    <div class="input_zone">
+                        <label for="username">Username</label>
+                        <input type="text" name="username">
+                        <input type="checkbox" name="username_checkbox">
+                    </div>
+
+                    </br>
+
+                    <div class="input_zone">
+                        <label for="date">Mois</label>
+                        <input type="int" name="date" min="1" max="12">
+                        <input type="checkbox" name="date_checkbox">
+                    </div>
+
+                    <button type="submit">Rechercher</button>
+                </form>
+
+                {% for uneFiche in liste_fiches %}
+
+                <button> {{uneFiche["mois"]}} {{uneFiche["nom"]}} </button>                
+
+                {% endfor %}
             </div>
         </div>
-
 
     </div>
 

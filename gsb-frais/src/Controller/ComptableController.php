@@ -45,14 +45,9 @@ class ComptableController extends AbstractController
         return $this->redirectToRoute('accueil');
     }
 
-    public function fiches(): Response // change func name
+    public function fiches(): Response
     {
-
         $fiches = Modele\getAllDateVisiteurFicheFrais();
-
-
-        print(print_r($fiches));
-
 
         return $this->render('/comptable/vueFiches.html.twig',
         [
@@ -61,7 +56,6 @@ class ComptableController extends AbstractController
         ]
         );
     }
-
 }
 
 ?>
