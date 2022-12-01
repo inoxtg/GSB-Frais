@@ -53,15 +53,6 @@ class ComptableController extends AbstractController
         ]
         );
     }
-    
-    public function page_frais(): Response
-    {
-        return $this->render('visiteur\vueFiche.html.twig',
-        [
-            'controller' => 'VisiteurController::page_frais',
-        ]
-        );
-    }
 
 }
 
