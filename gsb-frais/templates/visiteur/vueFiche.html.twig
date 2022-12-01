@@ -14,7 +14,6 @@
 
     <div class="header">
         <a class="header-title">{{visiteur}}</a>
-        
         <a class="header-link" href="/deconnexion">Deconnexion</a>
         <a class="header-link" href="/visiteur/historique">Historique</a>
         <a class="header-link" href="/visiteur/frais">Fiches</a>
@@ -28,6 +27,7 @@
                 <form method="POST" action="/visiteur/fiche/envoyer" id="fiche">
 
                     <h1>Fiche Frais {{mois}}</h1>
+                    <h2>{{ etats[0][1] }}; {{ etats[0][0] }} par comptable</h2>
 
                     <div class="form_table">
 
@@ -114,7 +114,7 @@
                                                     min="0">
                                             </td>
                                             
-                                            <td><i class="fa-solid fa-trash" onclick="remove_frais(this)"></td>
+                                            <td><i class="fa-solid fa-trash" onclick="remove_frais(this)"></i></td>
                                             
                                         </tr>
                                     {% endfor %}
