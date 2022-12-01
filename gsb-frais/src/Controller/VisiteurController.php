@@ -64,8 +64,6 @@ class VisiteurController extends AbstractController
             }
         }
 
-        //print("<pre>".print_r($fichesFrais,true)."</pre>");
-
         return $this->render('/visiteur/vueHistorique.html.twig',
         [
             'controller' => 'VisiteurController::historique',
@@ -99,6 +97,8 @@ class VisiteurController extends AbstractController
             'fraisForfait' => $fraisForfait,
             'ligneFraisForfait' => $ligneFraisForfait,
             'ligneFraisHorsForfait' => $ligneFraisHorsForfait,
+            'mois' => date('F Y', strtotime($date)),
+            'visiteur' => strtoupper($session->get("nom")) . " " . $session->get("prenom"),
         ]
         );
     }

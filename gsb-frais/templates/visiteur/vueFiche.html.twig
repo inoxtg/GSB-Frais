@@ -13,7 +13,7 @@
     </script>
 
     <div class="header">
-        <a class="header-title">GSB-Frais</a>
+        <a class="header-title">{{visiteur}}</a>
         
         <a class="header-link" href="/deconnexion">Deconnexion</a>
         <a class="header-link" href="/visiteur/historique">Historique</a>
@@ -27,7 +27,7 @@
             <div class="fiche_frais">
                 <form method="POST" action="/visiteur/fiche/envoyer" id="fiche">
 
-                    <h1>Frais du mois de Novembre 2022</h1>
+                    <h1>Fiche Frais {{mois}}</h1>
 
                     <div class="form_table">
 

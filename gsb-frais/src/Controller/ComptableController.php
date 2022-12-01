@@ -47,7 +47,7 @@ class ComptableController extends AbstractController
 
     public function fiche(): Response // change func name
     {
-        return $this->render('/comptable/vueFiches.html.twig', // set vue
+        return $this->render('/comptable/vueFiches.html.twig',
         [
             'controller' => 'ComptableController::fiche', // change func name
         ]
