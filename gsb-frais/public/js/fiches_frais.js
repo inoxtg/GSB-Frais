@@ -3,13 +3,17 @@ function add_frais()
 {
     let table = document.getElementById("table_hors_frais");
     nb_input = table.rows.length-2;
+    
+    input_value = "";
+    if(nb_input > 0)
+    {
+      var row = table.getElementsByTagName("tr")[table.rows.length - 1];
+      colum = row.getElementsByTagName("td")[0];
 
-    var row = table.getElementsByTagName("tr")[table.rows.length - 1];
-    colum = row.getElementsByTagName("td")[0];
+      input_value = colum.getElementsByTagName("input")[0].value;
+    }
 
-    input_value = colum.getElementsByTagName("input")[0].value;
-
-    if(input_value != "")
+    if(input_value != "" || nb_input == -1)
     {
         nb_input++;
 
