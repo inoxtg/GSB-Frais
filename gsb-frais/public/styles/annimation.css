@@ -8,7 +8,8 @@
 .area{
     background: #477ca2;
     width: 100%;
-    height: 100vh; 
+    height: 100vh;
+    max-height: fit-content; 
 }
 
 .circles{
