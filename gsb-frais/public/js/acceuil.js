@@ -18,7 +18,10 @@ function visiteur() {
 var numero = 0;
 var slide = new Array(
     "../img/canicule.jpg",
-    "../img/geste_barriere.png"
+    "../img/geste_barriere.png",
+    "../img/3.jpg",
+    "../img/4.jpg",
+    "../img/5.jpg"
     );
 
 function ChangeSlide() {

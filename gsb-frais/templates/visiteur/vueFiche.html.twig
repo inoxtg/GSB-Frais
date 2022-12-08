@@ -5,6 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="{{ asset('styles/vueFicheVisiteur.css')}}" rel="stylesheet" type="text/css">
+    <link href="{{ asset('styles/vueModalSuppression.css')}}" rel="stylesheet" type="text/css">
     <title>Visiteur - Pannel</title>
     <script src="https://kit.fontawesome.com/d84560b21a.js" crossorigin="anonymous"></script>
 </head>
@@ -20,6 +21,16 @@
     </div>
 
     <div class="page">
+        <div class ='page-modal' id = 'page-modal'>
+            <div class = 'modal' id='modal'>
+                <div class ='modal-header'>
+                    <p>Voulez-vous supprimer cette ligne ?</p>
+                </div>
+                <div class = 'modal-footer' id ='modal-zone-btn'>
+                    <button class = "btnModal" id ='non' onclick="closeModal()">NON</button>
+                </div>
+            </div>
+        </div>
 
         <div class="fiche_position">
 
@@ -77,7 +88,7 @@
                                         <td class="td_libelle"><input name="frais_hors_forfait[0][libelle]" id="td_libelle_0" class="input_libelle" type="text"></td>
                                         <td class="td_date"><input name="frais_hors_forfait[0][date]" id="td_date_0" class="input_date" type="date"></td>
                                         <td class="td_input"><input name="frais_hors_forfait[0][input]" id="td_input_0" class="input_prix" type="number" value="0" min="0"></td>
-                                        <td><i class="fa-solid fa-trash"></i><td>
+                                        <td class ="td_trash"><i class="fa-solid fa-trash" onclick="openModal(this)"></i><td>
                                     </tr>
 
 
@@ -114,7 +125,7 @@
                                                     min="0">
                                             </td>
                                             
-                                            <td><i class="fa-solid fa-trash" onclick="remove_frais(this)"></i></td>
+                                            <td><i class="fa-solid fa-trash" onclick="openModal(this)"></i></td>
                                             
                                         </tr>
                                     {% endfor %}

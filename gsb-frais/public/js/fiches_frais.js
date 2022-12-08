@@ -28,13 +28,26 @@ function add_frais()
         textboxCell.innerHTML = '<input name="frais_hors_forfait[' + nb_input + '][libelle]" id="td_libelle_' + nb_input + '" class="input_libelle" type="text" value="">';
         dateCell.innerHTML = '<input name="frais_hors_forfait[' + nb_input +'][date]" id="td_date_' + nb_input + '" class="input_date" type="date">';
         inputCell.innerHTML = '<input name="frais_hors_forfait[' + nb_input +'][input]" id="td_input_' + nb_input + '" class="input_prix" type="number" value="0" min="0">';
-        removeCell.innerHTML = '<i class="fa-solid fa-trash" onclick="remove_frais(this)">';
+        removeCell.innerHTML = '<i class="fa-solid fa-trash" onclick="openModal(this)">';
     }
 }
+function closeModal()
+{
+    document.getElementById("oui-supr").remove();
+    var modal = document.getElementById('page-modal');
+    modal.style.display = 'none';
+}
+function openModal(button)
+{
+    var modal = document.getElementById('page-modal');
+    modal.style.display = 'block';
 
+    var zoneBtn = document.getElementById('modal-zone-btn')
+    zoneBtn.innerHTML += '<button class = "btnModal" id ="oui-supr" onclick="remove_frais(' + button.parentElement.parentElement.rowIndex + ')" >OUI</button>';
+}
 function remove_frais(button)
 {
+  closeModal();
   let table = document.getElementById("table_hors_frais");
-
-  table.deleteRow(button.parentElement.parentElement.rowIndex);
+  table.deleteRow(button);
 }
