@@ -24,23 +24,37 @@
         <div class="fiches_list_position">
             <div class="fiches_list">
 
-                <h1>Regroupé par mois</h1>
-
-
-                <form class="form_search" action="/comptable/fiche/search">
+                <form class="form_search" action="/comptable/fiches" method="POST">
 
                     <div class="input_zone">
-                        <label for="username">Username</label>
-                        <input type="text" name="username">
-                        <input type="checkbox" name="username_checkbox">
+                        <div class="label_input">
+                            <label for="username">Username</label>
+                        </div>
+                        <input class="text_input" type="text" name="username">
+                        <input class="checkbox_input" type="checkbox" name="username_checkbox">
                     </div>
 
-                    </br>
-
                     <div class="input_zone">
-                        <label for="date">Mois</label>
-                        <input type="int" name="date" min="1" max="12">
-                        <input type="checkbox" name="date_checkbox">
+                        <div class="label_input">
+                            <label class="label_input" for="date">Mois</label>
+                        </div>
+
+                        <select name="month" class="text_input">
+                            <option value="1">Janvier</option>
+                            <option value="2">Fevrier</option>
+                            <option value="3">Mars</option>
+                            <option value="4">Avril</option>
+                            <option value="5">Mai</option>
+                            <option value="6">Juin</option>
+                            <option value="7">Juillet</option>
+                            <option value="8">Aout</option>
+                            <option value="9">Septembre</option>
+                            <option value="10">Octobre</option>
+                            <option value="11">Novembre</option>
+                            <option value="12">Decembre</option>
+                        </select>
+
+                        <input class="checkbox_input" type="checkbox" name="date_checkbox">
                     </div>
 
                     <button type="submit">Rechercher</button>
@@ -48,11 +62,60 @@
 
                 {% for uneFiche in liste_fiches %}
 
-                <button> {{uneFiche["mois"]}} {{uneFiche["nom"]}} </button>                
+                <button class="button_fiche" onclick="load_fiche("+{{uneFiche}}+")"> {{uneFiche["mois"]}} {{uneFiche["nom"]}} </button>                
 
                 {% endfor %}
             </div>
         </div>
+
+
+
+        <div class="fiche_position">
+
+            <div class="fiche_frais">
+
+                <h1>Fiche Frais MOIS</h1>
+                <h2>ETAT par comptable</h2>
+
+                <div class="form_table">
+
+                    <table class="table_fiche" id="table_frais">
+                        <thead>
+                            <tr>
+                                <th class="th_libelle">Frais Forfaitaire</th>
+                                <th class="th_quantite">Quantité</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+                        </tbody>
+                    </table>
+
+                    <table class="table_fiche" id="table_hors_frais">
+                        
+                        <thead>
+                            <tr>
+                                <th class="th_hf_libelle">Frais Hors Forfait</td>
+                                <th class="th_hf_date">Date</th>
+                                <th class="th_hf_prix">Prix</th>
+                            </tr>
+                        </thead>
+
+                        <tbody>
+
+
+                        </tbody>
+                    
+                    </table>
+
+                </div>
+
+            </div>
+
+        </div>
+
+
 
     </div>
 

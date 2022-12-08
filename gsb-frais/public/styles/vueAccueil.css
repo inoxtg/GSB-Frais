@@ -27,6 +27,11 @@
     .card{
         display: block;
     }
+
+    .page
+    {
+        height: 200vh;
+    }
 }
 
 

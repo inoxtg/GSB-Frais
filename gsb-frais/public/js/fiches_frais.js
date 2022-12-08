@@ -57,3 +57,18 @@ function remove_frais(button)
   let table = document.getElementById("table_hors_frais");
   table.deleteRow(button);
 }
+
+
+
+function load_fiche_frais($fiche)
+{
+
+  var tableFrais = document.getElementById("table_frais");
+  var tableHorsFrais = document.getElementById("table_hors_frais");
+
+  
+
+
+
+
+}

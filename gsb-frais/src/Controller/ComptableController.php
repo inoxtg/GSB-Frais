@@ -20,8 +20,7 @@ class ComptableController extends AbstractController
             $comptable = Modele\loginComptable($identifiant, $password);
         }else{
             $this->addFlash(
-                'fail_pssd_comptable', 'Identifiant ou mot de passe invalide REGEX'
-
+                'fail_pssd_comptable', 'Caractères invalide'
             );
             return $this->redirectToRoute('accueil');
         }
@@ -45,9 +44,39 @@ class ComptableController extends AbstractController
         return $this->redirectToRoute('accueil');
     }
 
-    public function fiches(): Response
+    public function fiches(Request $request): Response
     {
-        $fiches = Modele\getAllDateVisiteurFicheFrais();
+        $fiches = array();
+        if ($request->isMethod('post')) {
+
+            $user = $_POST['username'];
+            $month = $_POST['month'];
+
+            $select_user = isset($_POST['date_checkbox']);
+            $select_month = isset($_POST['username_checkbox']);
+
+            if(var_dump($select_user) && var_dump($select_month))
+            {
+                $fiches = Modele\getFicheFraisForVisiteurAndMois($user, $month);
+            }
+            else if(var_dump($select_user))
+            {
+                $fiches = Modele\getAllFicheFraisForVisiteur($user);
+            }
+            else if(var_dump($select_month))
+            {
+                $fiches = Modele\getAllFicheFraisForMois($month);
+            }
+        }
+        
+        if(empty($fiches))
+        {
+            $fiches = Modele\getAllDateVisiteurFicheFrais();
+        }
+
+        print("<pre>".print_r($fiches,true)."</pre>");
+
+        
 
         return $this->render('/comptable/vueFiches.html.twig',
         [

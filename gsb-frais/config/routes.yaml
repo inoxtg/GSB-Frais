@@ -31,3 +31,4 @@ comptable_login:
 comptable_frais:
     path: /comptable/fiches
     controller: App\Controller\ComptableController::fiches
+    methods: [GET,POST]

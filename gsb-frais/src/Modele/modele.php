@@ -91,6 +91,27 @@ function getAllFicheFraisForVisiteur($idVisiteur){
         echo $e->getMessage();
     }
 }
+
+/*
+RECUPERATION TOUTES LES FICHES D'UN MOIS
+*/
+function getAllFicheFraisForMois($mois){
+    try{
+        $connexion = ConnexionBDD::getConnexion();
+        $query = "SELECT * FROM FicheFrais "
+                ."WHERE idVisiteur = :idVisiteur "
+                ."ORDER BY mois DESC ";
+        $fichesFrais = $connexion->prepare($query);
+        $fichesFrais->execute(array(
+            ":mois" => $mois
+        ));
+        $fichesFraisFetch = $fichesFrais->fetchAll();
+        return $fichesFraisFetch;
+    }catch(PDOException $e){
+        echo $e->getMessage();
+    }
+}
+
 /*
  CONNEXION VISITEUR, RETURN VISITEUR
  */
