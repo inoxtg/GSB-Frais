@@ -26,8 +26,12 @@ var slide = new Array(
 
 function ChangeSlide() {
     numero = numero + 1;
-    if (numero < 0) numero = slide.length - 1;
-    if (numero > slide.length - 1) numero = 0;
+    if (numero < 0) {
+        numero = slide.length - 1;
+    }
+    if (numero > slide.length - 1) {
+        numero = 0;
+    }
     document.getElementById("slide").src = slide[numero];
     setTimeout("ChangeSlide()", 7500);
 }

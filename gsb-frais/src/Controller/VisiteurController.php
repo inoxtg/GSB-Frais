@@ -99,6 +99,9 @@ class VisiteurController extends AbstractController
             'ligneFraisForfait' => $ligneFraisForfait,
             'ligneFraisHorsForfait' => $ligneFraisHorsForfait,
             'mois' => date('F Y', strtotime($date)),
+            'day' => date('d',strtotime($date)),
+            'month' => date('m',strtotime($date)),
+            'year' => date('Y',strtotime($date)),
             'visiteur' => strtoupper($session->get("nom")) . " " . $session->get("prenom"),
             'etats' => $etats,
         ]
@@ -126,7 +129,7 @@ class VisiteurController extends AbstractController
                 if( !in_array($fraisHorsForfait["libelle"], $listLibelle) && strlen($fraisHorsForfait["libelle"]) !== 0) // unique libelle
                 {
                     array_push($listLibelle, $fraisHorsForfait["libelle"]);
-                
+
                     Modele\createLigneHorsForfait($session->get("id"), date('Y-m'), $fraisHorsForfait["libelle"], $fraisHorsForfait["input"], $fraisHorsForfait["date"]);
             
                 }

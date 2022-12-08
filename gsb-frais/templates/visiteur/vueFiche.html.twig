@@ -12,7 +12,6 @@
 <body>
     <script type="text/javascript" src="{{ asset('js/fiches_frais.js')}}">
     </script>
-
     <div class="header">
         <a class="header-title">{{visiteur}}</a>
         <a class="header-link" href="/deconnexion">Deconnexion</a>
@@ -86,7 +85,7 @@
 
                                     <tr>
                                         <td class="td_libelle"><input name="frais_hors_forfait[0][libelle]" id="td_libelle_0" class="input_libelle" type="text"></td>
-                                        <td class="td_date"><input name="frais_hors_forfait[0][date]" id="td_date_0" class="input_date" type="date"></td>
+                                        <td class="td_date"><input name="frais_hors_forfait[0][date]" id="td_date_0" min="{{year}}-{{month}}-01" max="{{year}}-{{month}}-31" class="input_date" type="date"></td>
                                         <td class="td_input"><input name="frais_hors_forfait[0][input]" id="td_input_0" class="input_prix" type="number" value="0" min="0"></td>
                                         <td class ="td_trash"><i class="fa-solid fa-trash" onclick="openModal(this)"></i><td>
                                     </tr>
@@ -111,7 +110,9 @@
                                                     name="frais_hors_forfait[{{loop.index0}}][date]" 
                                                     id="td_date_{{loop.index0}}" 
                                                     class="input_date" 
-                                                    type="date" 
+                                                    type="date"
+                                                    min="{{year}}-{{month}}-01"
+                                                    max="{{year}}-{{month}}-31"
                                                     value="{{unHorsFrais["date"]}}">
                                             </td>
                                             
@@ -125,7 +126,7 @@
                                                     min="0">
                                             </td>
                                             
-                                            <td><i class="fa-solid fa-trash" onclick="openModal(this)"></i></td>
+                                            <td class ="td_trash"><i class="fa-solid fa-trash" onclick="openModal(this)"></i></td>
                                             
                                         </tr>
                                     {% endfor %}
