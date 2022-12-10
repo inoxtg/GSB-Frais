@@ -31,7 +31,7 @@ function add_frais()
         dateCell.className = "td_date";
         removeCell.className = "td_trash";
 
-        textboxCell.innerHTML = '<input name="frais_hors_forfait[' + nb_input + '][libelle]" id="td_libelle_' + nb_input + '" class="input_libelle" type="text" value="">';
+        textboxCell.innerHTML = '<input name="frais_hors_forfait[' + nb_input + '][libelle]" id="td_libelle_' + nb_input + '" class="input_libelle" type="text" value="" required>';
         dateCell.innerHTML = '<input name="frais_hors_forfait[' + nb_input +'][date]" id="td_date_' + nb_input + '" class="input_date" type="date" min="' + year + '-' + month + '-01" max="' + year + '-' + month + '-31">';
         inputCell.innerHTML = '<input name="frais_hors_forfait[' + nb_input +'][input]" id="td_input_' + nb_input + '" class="input_prix" type="number" value="0" min="0">';
         removeCell.innerHTML = '<i class="fa-solid fa-trash" onclick="openModal(this)">';

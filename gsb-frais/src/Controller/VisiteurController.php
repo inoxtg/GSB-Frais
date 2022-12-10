@@ -126,12 +126,11 @@ class VisiteurController extends AbstractController
         {        
             foreach($_POST["frais_hors_forfait"] as $index=>$fraisHorsForfait)
             {
-                if( !in_array($fraisHorsForfait["libelle"], $listLibelle) && strlen($fraisHorsForfait["libelle"]) !== 0) // unique libelle
+                if( !in_array($fraisHorsForfait["libelle"], $listLibelle) && strlen($fraisHorsForfait["libelle"]) !== 0 && Technique\regLettreChiffreOnly($fraisHorsForfait["libelle"])) // unique libelle
                 {
                     array_push($listLibelle, $fraisHorsForfait["libelle"]);
 
                     Modele\createLigneHorsForfait($session->get("id"), date('Y-m'), $fraisHorsForfait["libelle"], $fraisHorsForfait["input"], $fraisHorsForfait["date"]);
-            
                 }
             }
         }
