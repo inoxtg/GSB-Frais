@@ -46,7 +46,7 @@ class ComptableController extends AbstractController
 
     public function fiches(Request $request): Response
     {
-        $fiches = array();
+        $fichesFrais = array();
         if ($request->isMethod('post')) {
 
             $user = $_POST['username'];
@@ -57,31 +57,40 @@ class ComptableController extends AbstractController
 
             if(var_dump($select_user) && var_dump($select_month))
             {
-                $fiches = Modele\getFicheFraisForVisiteurAndMois($user, $month);
+                $fichesFrais = Modele\getFicheFraisForVisiteurAndMois($user, $month);
             }
             else if(var_dump($select_user))
             {
-                $fiches = Modele\getAllFicheFraisForVisiteur($user);
+                $fichesFrais = Modele\getAllFicheFraisForVisiteur($user);
             }
             else if(var_dump($select_month))
             {
-                $fiches = Modele\getAllFicheFraisForMois($month);
+                $fichesFrais = Modele\getAllFicheFraisForMois($month);
             }
         }
         
         if(empty($fiches))
         {
-            $fiches = Modele\getAllDateVisiteurFicheFrais();
+            $fichesFrais = Modele\getAllDateVisiteurFicheFrais();
         }
 
-        print("<pre>".print_r($fiches,true)."</pre>");
+        foreach($fichesFrais as $index=>$uneFiche)
+        {
+            $fichesFrais[$index]["lignesFraisForfait"] = Modele\getLigneFraisForfait($uneFiche["idVisiteur"], $uneFiche["mois"]);
+            
+            foreach($fichesFrais[$index]["lignesFraisForfait"] as $ligneIndex=>$lignesFraisForfait)
+            {
+                $fichesFrais[$index]["lignesFraisForfait"][$ligneIndex]["fraisForfaitLibelle"] = Modele\getLibelleFraisForfaitById($fichesFrais[$index]["lignesFraisForfait"][$ligneIndex]["idFraisForfait"])[0]["libelle"];
+            }
+        }
 
-        
+        print("<pre>".print_r($fichesFrais,true)."</pre>");
 
+    
         return $this->render('/comptable/vueFiches.html.twig',
         [
             'controller' => 'ComptableController::fiches',
-            'liste_fiches' => $fiches,
+            'fichesFrais' => $fichesFrais,
         ]
         );
     }

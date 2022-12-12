@@ -161,6 +161,7 @@ table {
     font-size: 15px;
     line-height: 25px;
 }
+
 /*
 .td_libelle
 {
@@ -221,8 +222,6 @@ input[type=date]::-webkit-calendar-picker-indicator {
   appearance: none;
   margin: 0;
 }
-
-
 
 
 .add_frais_button_position

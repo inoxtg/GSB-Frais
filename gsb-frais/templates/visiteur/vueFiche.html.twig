@@ -12,6 +12,20 @@
 <body>
     <script type="text/javascript" src="{{ asset('js/fiches_frais.js')}}">
     </script>
+
+
+    <div class ='page-modal' id = 'page-modal'>
+        <div class = 'modal' id='modal'>
+            <div class ='modal-header'>
+                <p>Voulez-vous supprimer cette ligne ?</p>
+            </div>
+            <div class = 'modal-footer' id ='modal-zone-btn'>
+                <button class = "btnModal" id ='non' onclick="closeModal()">NON</button>
+            </div>
+        </div>
+    </div>
+
+
     <div class="header">
         <a class="header-title">{{visiteur}}</a>
         <a class="header-link" href="/deconnexion">Deconnexion</a>
@@ -20,16 +34,6 @@
     </div>
 
     <div class="page">
-        <div class ='page-modal' id = 'page-modal'>
-            <div class = 'modal' id='modal'>
-                <div class ='modal-header'>
-                    <p>Voulez-vous supprimer cette ligne ?</p>
-                </div>
-                <div class = 'modal-footer' id ='modal-zone-btn'>
-                    <button class = "btnModal" id ='non' onclick="closeModal()">NON</button>
-                </div>
-            </div>
-        </div>
 
         <div class="fiche_position">
 
@@ -51,7 +55,6 @@
                             </thead>
 
                             <tbody>
-
                                 {% for unFrais in fraisForfait %}
                                     <tr>
                                         <td class="td_libelle">{{unFrais["libelle"]}}</td>

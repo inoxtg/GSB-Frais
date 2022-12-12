@@ -60,62 +60,71 @@
                     <button type="submit">Rechercher</button>
                 </form>
 
-                {% for uneFiche in liste_fiches %}
+                {% for uneFiche in fichesFrais %}
 
-                <button class="button_fiche" onclick="load_fiche("+{{uneFiche}}+")"> {{uneFiche["mois"]}} {{uneFiche["nom"]}} </button>                
+                    <button class="button_fiche" onclick="load_fiche()"> {{uneFiche["mois"]}} {{uneFiche["nom"]}} </button>                
+
+                    <div class="fiche_position">
+
+                        <div class="fiche_frais">
+
+                            <h1>Fiche Frais MOIS</h1>
+                            <h2>ETAT par comptable</h2>
+
+                            <div class="form_table">
+
+                                <table class="table_fiche" id="table_frais">
+                                    <thead>
+                                        <tr>
+                                            <th class="th_libelle">Frais Forfaitaire</th>
+                                            <th class="th_quantite">Quantité</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+                                        {% for unFrais in uneFiche["ligneFraisForfait"] %}
+                                            <tr>
+                                                <td class="td_libelle">{{unFrais["fraisForfaitLibelle"]}}</td>
+                                                <td class="td_input">
+                                                    <input 
+                                                        name="frais_forfait[{{loop.index}}]" 
+                                                        input class="input_prix" type="number" 
+                                                        value="{{ligneFraisForfait[loop.index0]['quantite']}}"
+                                                        min="0"
+                                                    >
+                                                </td>
+                                            </tr>
+                                        {% endfor %}
+                                    </tbody>
+                                </table>
+
+                                <table class="table_fiche" id="table_hors_frais">
+                                    
+                                    <thead>
+                                        <tr>
+                                            <th class="th_hf_libelle">Frais Hors Forfait</td>
+                                            <th class="th_hf_date">Date</th>
+                                            <th class="th_hf_prix">Prix</th>
+                                        </tr>
+                                    </thead>
+
+                                    <tbody>
+
+
+                                    </tbody>
+                                
+                                </table>
+
+                            </div>
+
+                        </div>
+
+                    </div>
+
 
                 {% endfor %}
             </div>
         </div>
-
-
-
-        <div class="fiche_position">
-
-            <div class="fiche_frais">
-
-                <h1>Fiche Frais MOIS</h1>
-                <h2>ETAT par comptable</h2>
-
-                <div class="form_table">
-
-                    <table class="table_fiche" id="table_frais">
-                        <thead>
-                            <tr>
-                                <th class="th_libelle">Frais Forfaitaire</th>
-                                <th class="th_quantite">Quantité</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-                        </tbody>
-                    </table>
-
-                    <table class="table_fiche" id="table_hors_frais">
-                        
-                        <thead>
-                            <tr>
-                                <th class="th_hf_libelle">Frais Hors Forfait</td>
-                                <th class="th_hf_date">Date</th>
-                                <th class="th_hf_prix">Prix</th>
-                            </tr>
-                        </thead>
-
-                        <tbody>
-
-
-                        </tbody>
-                    
-                    </table>
-
-                </div>
-
-            </div>
-
-        </div>
-
-
 
     </div>
 
