@@ -7,7 +7,7 @@ deconnexion:
     controller: App\Controller\AcceuilController::deconnexion
 
 visiteur_historique:
-    path: /visiteur/historique
+    path: /visiteur/historique/{id_fiche?}
     controller: App\Controller\VisiteurController::historique
 
 visiteur_frais:

@@ -11,6 +11,8 @@ use App\Modele;
 use App\Technique;
 use Symfony\Component\Validator\Constraints\Length;
 
+use function PHPUnit\Framework\isEmpty;
+
 class VisiteurController extends AbstractController
 {
     public function login(Request $request){
@@ -48,26 +50,32 @@ class VisiteurController extends AbstractController
         return $this->redirectToRoute('accueil');
     }
     
-    public function historique(Request $request): Response
+    public function historique(Request $request, $id_fiche = null): Response
     {
 
         $session = $request->getSession();
         $fichesFrais = Modele\getAllFicheFraisForVisiteur($session->get("id"));
 
-        foreach($fichesFrais as $index=>$uneFiche)
-        {
-            $fichesFrais[$index]["lignesFraisForfait"] = Modele\getLigneFraisForfait($uneFiche["idVisiteur"], $uneFiche["mois"]);
-            
-            foreach($fichesFrais[$index]["lignesFraisForfait"] as $ligneIndex=>$lignesFraisForfait)
+        if($id_fiche !== null)
+        {        
+            foreach($fichesFrais as $index=>$fiche)
             {
-                $fichesFrais[$index]["lignesFraisForfait"][$ligneIndex]["fraisForfaitLibelle"] = Modele\getLibelleFraisForfaitById($fichesFrais[$index]["lignesFraisForfait"][$ligneIndex]["idFraisForfait"])[0]["libelle"];
+                if($fiche["idFicheFrais"] == $id_fiche)
+                {
+                    $fichesFrais[$index]["lignesFraisForfait"] = Modele\getLigneFraisForfait($fiche["idVisiteur"], $fiche["mois"]);
+            
+                    foreach($fichesFrais[$index]["lignesFraisForfait"] as $ligneIndex=>$lignesFraisForfait)
+                    {
+                        $fichesFrais[$index]["lignesFraisForfait"][$ligneIndex]["fraisForfaitLibelle"] = Modele\getLibelleFraisForfaitById($fichesFrais[$index]["lignesFraisForfait"][$ligneIndex]["idFraisForfait"])[0]["libelle"];
+                    }
+                }
             }
         }
 
         return $this->render('/visiteur/vueHistorique.html.twig',
         [
             'controller' => 'VisiteurController::historique',
-            'fichesFrais' => $fichesFrais,
+            'fichesFrais' => $fichesFrais
         ]
         );
     }
@@ -78,7 +86,6 @@ class VisiteurController extends AbstractController
         $date = date('Y-m');
         $idsTable = Modele\getIdFicheFraisMauvaisEtat($date);
 
-        //Automatisation etat "saisie en cours" >>>>>>>>>>> "saisie terminée" tous les mois :)
         foreach ( $idsTable as $ids){
             foreach( $ids as $id ){
                 Modele\modifierEtatVisiteurFicheFrais($id);

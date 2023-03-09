@@ -25,60 +25,68 @@
 
                 {% for uneFiche in fichesFrais %}
 
-                <button 
-                class=
-                {% if uneFiche["idEtatComptable"] == 1 %}
-                    "attente"
-                {% elseif uneFiche["idEtatComptable"] == 2 %}
-                    "fini"
-                {% endif %}
+                <a
+                    href= "/visiteur/historique/{{uneFiche["idFicheFrais"]}}"
+                    {% if uneFiche["idEtatComptable"] == 1 %}
+                        "attente"
+                    {% elseif uneFiche["idEtatComptable"] == 2 %}
+                        "fini"
+                    {% endif %}
                 >
                     {{uneFiche["mois"]}}
-                </button>                
+                </a>                
 
                 {% endfor %}
 
             </div>
         </div>
 
-        {% set selection = 0 %}
 
-        <div class="fiche_position">
+        {% for laFiche in fichesFrais %}
 
-            <div class="fiche_frais">
+            {% if laFiche["lignesFraisForfait"] is defined %}
 
-                <h1>Frais du mois de Novembre 2022</h1>
+                <div class="fiche_position">
 
-                <div class="form_table">
+                    <div class="fiche_frais">
 
-                    <table class="table_fiche">
+                        <h1>Frais du mois de Novembre 2022</h1>
 
-                        <thead>
-                            <tr>
-                                <th class="th_libelle">Frais Forfaitaire</th>
-                                <th class="th_quantite">Quantité</th>
-                            </tr>
-                        </thead>
+                        <div class="form_table">
 
-                        <tbody>
-                            {% for uneLigne in fichesFrais[selection]["lignesFraisForfait"] %}
-                                <tr>
-                                    <td class="td_libelle">{{uneLigne["fraisForfaitLibelle"]}}</td>
-                                    <td class="td_input">
-                                        <input
-                                            input class="input_prix" type="number" 
-                                            value="{{uneLigne["quantite"]}}"
-                                            min="0"
-                                        >
-                                    </td>
-                                </tr>
-                            {% endfor %}
-                        </tbody>
-                    </table>
-                
+                            <table class="table_fiche">
+
+                                <thead>
+                                    <tr>
+                                        <th class="th_libelle">Frais Forfaitaire</th>
+                                        <th class="th_quantite">Quantité</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    {% for uneLigne in laFiche["lignesFraisForfait"] %}
+                                        <tr>
+                                            <td class="td_libelle">{{uneLigne["fraisForfaitLibelle"]}}</td>
+                                            <td class="td_input">
+                                                <input
+                                                    input class="input_prix" type="number" 
+                                                    value="{{uneLigne["quantite"]}}"
+                                                    min="0"
+                                                >
+                                            </td>
+                                        </tr>
+                                    {% endfor %}
+                                </tbody>
+                            </table>
+                        
+                        </div>
+                    </div>
                 </div>
-            </div>
-        </div>
+            {% endif %}
+        {% endfor %}
+
+    
+
     </div>
 
 
